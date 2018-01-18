@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "296594542199",
+    "firebase_url": "https://satisfactionsurvey-6d22a.firebaseio.com",
+    "project_id": "satisfactionsurvey-6d22a",
+    "storage_bucket": "satisfactionsurvey-6d22a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296594542199:android:565ec5a510d5cac5",
+        "android_client_info": {
+          "package_name": "br.harlan.satisfactionsurvey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296594542199-d323s1tiq4itpjiquqniv4bm5aghij33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.harlan.satisfactionsurvey",
+            "certificate_hash": "9879d7af48b027e67f22c2f7eb67448a9d4b0601"
+          }
+        },
+        {
+          "client_id": "296594542199-lsu3goghbba147j9gob0cc8165iu7mco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0uqNKbNBogpJRa9LBqDAlUdhnUIs-Yuk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296594542199-lsu3goghbba147j9gob0cc8165iu7mco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

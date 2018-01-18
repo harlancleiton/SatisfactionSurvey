@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">SatisfactionSurvey</string>
+    <string name="research_presentation">Queremos ouvir você</string>
+    <string name="edt_name">Nome</string>
+    <string name="edt_company">Empresa</string>
+    <string name="edt_email">E-mail</string>
+    <string name="edt_telephone">Telefone</string>
+    <string name="edt_comments">Comentários</string>
+    <string name="btn_register">Registrar</string>
+    <string name="evaluation_sent_sucessfully">Avaliação enviada com sucesso.</string>
+    <string name="error_submitting">Erro ao enviar avaliação.</string>
+    <string name="rate_your_comment">Classifique seu comentário</string>
+    <string name="tv_communication">Comunicação</string>
+    <string name="tv_commitment">Comprometimento</string>
+    <string name="tv_cordiality">Cordialidade</string>
+    <string name="tv_knowledge">Conhecimento</string>
+    <string name="toast_fill_in_required_fields">Por favor, preencha todos os campos obrigatórios.</string>
+    <string name="tranks">A sua opinião e fundamental para o nosso desenvolvimento. Obrigado!</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_text_note_add">Novo</string>
+    <string name="tab_text_graphics">Gráficos</string>
+    <string name="tab_text_historic">Histórico</string>
+    <string name="dissatisfied">Insatisfeito</string>
+    <string name="indifferent">Indiferente</string>
+    <string name="satisfied">Satisfeito</string>
+    <string name="error_display_data">"Ocorreu um erro ao tentar exibir os dados."</string>
+
+    <string-array name="types_evaluation_array">
+        <item>Elogio</item>
+        <item>Dúvida</item>
+        <item>Crítica</item>
+        <item>Sugestão</item>
+    </string-array>
+</resources>

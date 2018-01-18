@@ -1,0 +1,19 @@
+package br.harlan.satisfactionsurvey;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import br.harlan.satisfactionsurvey.view.HomeActivity;
+import br.harlan.satisfactionsurvey.view.SearchActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //startActivity(new Intent(this, SearchActivity.class ));
+        startActivity(new Intent(this, HomeActivity.class ));
+    }
+}
