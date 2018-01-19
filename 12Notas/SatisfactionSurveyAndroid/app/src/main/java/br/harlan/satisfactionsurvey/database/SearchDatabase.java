@@ -34,6 +34,7 @@ public class SearchDatabase extends BaseDatabase implements BaseDatabase.Directo
     }
 
     public void retrieveReviews(final ArrayList<EvaluationModel> evaluationModels) {
+
         final DatabaseReference databaseReference = EVALUATION_CHILD_COMPLETE;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

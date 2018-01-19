@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.services.IMessageServices;
 import br.harlan.satisfactionsurvey.business.services.INavigationServices;
-import br.harlan.satisfactionsurvey.database.CurrentDateTime;
+import br.harlan.satisfactionsurvey.util.CurrentDateTime;
 import br.harlan.satisfactionsurvey.database.SearchDatabase;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;

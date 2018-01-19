@@ -1,4 +1,10 @@
 <resources>
+    <!-- Parse -->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">PKZe2cAljdKIgRyfX3oPMfajh8xS95ueOfwAWclC</string>
+    <string name="back4app_client_key">ZNyk9rHmvxKquD47Z5UqQ8aqv6OiXQSA8QP6o9lg</string>
+
     <string name="app_name">SatisfactionSurvey</string>
     <string name="research_presentation">Queremos ouvir você</string>
     <string name="edt_name">Nome</string>
