@@ -1,6 +1,10 @@
 package br.harlan.satisfactionsurvey.model;
 
 
+import android.database.Observable;
+
+import java.util.Observer;
+
 public class EvaluationModel extends BaseModel {
 
     //region Variables
@@ -26,11 +30,11 @@ public class EvaluationModel extends BaseModel {
     public final static int NO_SELECTION = -1;
     //endregion Variables
 
-    //region Getters and Setters
     public EvaluationModel() {
         setClassName(EvaluationModel.CLASS_NAME_EVALUATION);
     }
 
+    //region Getters and Setters
     public String getName() {
         return name;
     }

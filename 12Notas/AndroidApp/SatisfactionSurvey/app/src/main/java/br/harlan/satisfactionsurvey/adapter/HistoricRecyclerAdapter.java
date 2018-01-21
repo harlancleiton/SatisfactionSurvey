@@ -12,11 +12,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
 
-public class HistoricRecyclerAdapter extends  RecyclerView.Adapter<HistoricRecyclerAdapter.HistoricViewHolder>{
+public class HistoricRecyclerAdapter extends  RecyclerView.Adapter<HistoricRecyclerAdapter.HistoricViewHolder>  {
 
     private ArrayList<EvaluationModel> evaluationModels;
 

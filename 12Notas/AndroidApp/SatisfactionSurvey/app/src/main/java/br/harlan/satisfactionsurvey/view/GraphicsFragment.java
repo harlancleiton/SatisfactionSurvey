@@ -20,7 +20,10 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import java.util.ArrayList;
 
 import br.harlan.satisfactionsurvey.R;
+import br.harlan.satisfactionsurvey.business.GraphicsBusiness;
 import br.harlan.satisfactionsurvey.model.GraphicModel;
+import br.harlan.satisfactionsurvey.model.StatisticsModel;
+import br.harlan.satisfactionsurvey.observer.StatisticsObserver;
 
 public class GraphicsFragment extends BaseFragment {
 
@@ -36,12 +39,12 @@ public class GraphicsFragment extends BaseFragment {
     @Override
     protected void initializeComponents(View rootView) {
         pieChart = rootView.findViewById(R.id.pie_chart);
-        createGraphic();
+        //createGraphic();
     }
 
     @Override
     protected void addEvents() {
-
+        PieData pieData = new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction();
     }
 
     private void createGraphic() {

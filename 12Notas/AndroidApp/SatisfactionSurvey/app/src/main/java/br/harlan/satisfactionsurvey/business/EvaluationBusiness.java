@@ -16,8 +16,8 @@ public class EvaluationBusiness extends BaseBusiness {
 
     public void registerEvaluation(EvaluationModel evaluationModel) {
         if (validateEvaluation(evaluationModel)) {
-            evaluationModel.setCurrentTime(CurrentDateTime.getCurrentTime());
-            evaluationModel.setCurrentDate(CurrentDateTime.getCurrentDate());
+            //evaluationModel.setCurrentTime(CurrentDateTime.getCurrentTime());
+            //evaluationModel.setCurrentDate(CurrentDateTime.getCurrentDate());
             new EvaluationDatabase(databaseServices).create(evaluationModel);
             //new SearchDatabase(databaseServices).registerEvaluation(evaluationModel);
         } else {

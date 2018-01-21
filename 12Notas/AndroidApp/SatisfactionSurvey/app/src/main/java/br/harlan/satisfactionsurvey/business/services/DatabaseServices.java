@@ -12,6 +12,7 @@ import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
+import br.harlan.satisfactionsurvey.model.ParseObjectToObjectModel;
 
 public class DatabaseServices implements IDatabaseServices {
 
@@ -56,25 +57,9 @@ public class DatabaseServices implements IDatabaseServices {
     }
 
     private ArrayList<EvaluationModel> retrieveEvaluations(List<ParseObject> objects) {
-        Log.i("Database Services", "Retrieve Evaluations");
         ArrayList<EvaluationModel> evaluationModels = new ArrayList<>();
         for (ParseObject parseObject: objects){
-            Log.i("Database Services", "For");
-            EvaluationModel evaluationModel = new EvaluationModel();
-            evaluationModel.setObjectId(parseObject.getObjectId());
-            evaluationModel.setCreatedAt(parseObject.getCreatedAt());
-            evaluationModel.setUpdatedAt(parseObject.getUpdatedAt());
-            evaluationModel.setName(parseObject.getString("name"));
-            evaluationModel.setCompany(parseObject.getString("company"));
-            evaluationModel.setEmail(parseObject.getString("email"));
-            evaluationModel.setTelephone(parseObject.getString("telephone"));
-            evaluationModel.setComments(parseObject.getString("comments"));
-            evaluationModel.setNoteKnowledge((float) parseObject.getDouble("noteKnowledge"));
-            evaluationModel.setNoteCommitment((float) parseObject.getDouble("noteCommitment"));
-            evaluationModel.setNoteCommunication((float) parseObject.getDouble("noteCommunication"));
-            evaluationModel.setNoteCordiality((float) parseObject.getDouble("noteCordiality"));
-            evaluationModel.setSatisfaction(parseObject.getInt("satisfaction"));
-            Log.i("For: EvaluationModel", evaluationModel.getName() + " - " + evaluationModel.getEmail());
+            EvaluationModel evaluationModel = (EvaluationModel) ParseObjectToObjectModel.getObjectModel(parseObject);
             evaluationModels.add(evaluationModel);
         }
         return evaluationModels;
