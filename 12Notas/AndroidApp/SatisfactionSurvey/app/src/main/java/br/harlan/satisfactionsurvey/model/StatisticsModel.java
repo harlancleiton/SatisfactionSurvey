@@ -1,10 +1,8 @@
 package br.harlan.satisfactionsurvey.model;
 
+import com.github.mikephil.charting.data.PieData;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class StatisticsModel extends Observable {
+public class StatisticsModel extends BaseModel {
 
     int total;
     int satisfied;
@@ -35,8 +33,8 @@ public class StatisticsModel extends Observable {
     int cordiality4;
     int cordiality5;
 
-    public void dataChange(){
-        setChanged();
-        notifyObservers();
+    public interface StatisticsChange {
+        void statisticsReady(StatisticsModel statisticsModel);
+        void pieDataReady(PieData pieData);
     }
 }

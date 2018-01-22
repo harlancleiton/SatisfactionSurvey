@@ -28,7 +28,8 @@ import br.harlan.satisfactionsurvey.observer.StatisticsObserver;
 public class GraphicsFragment extends BaseFragment {
 
     //region Variables
-    PieChart pieChart;
+    private PieChart pieChart;
+    private PieData mPieData;
     //endregion Variables
 
     public GraphicsFragment() {
@@ -44,9 +45,20 @@ public class GraphicsFragment extends BaseFragment {
 
     @Override
     protected void addEvents() {
-        PieData pieData = new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction();
-    }
+        //final PieData[] mPieData = new PieData[1];
+        new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction(new StatisticsModel.StatisticsChange() {
+            @Override
+            public void statisticsReady(StatisticsModel statisticsModel) {
 
+            }
+
+            @Override
+            public void pieDataReady(PieData pieData) {
+                mPieData = pieData;
+                pieChart.setData(pieData);
+            }
+        });
+    }
     private void createGraphic() {
         ArrayList<Float> yValues = new ArrayList<>();
         yValues.add(20f);

@@ -1,16 +1,12 @@
 package br.harlan.satisfactionsurvey.database;
 
-import android.util.Log;
-
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
@@ -26,18 +22,6 @@ public class EvaluationDatabase extends BaseDatabase implements ICRUD<Evaluation
     @Override
     public void create(EvaluationModel object) {
         ParseObject parseObject = ObjectModelToParseObject.getParseObject(object);
-        //ParseObject parseObject = new ParseObject(object.getClassName());
-//        parseObject.put("name", object.getName());
-//        parseObject.put("company", object.getCompany());
-//        parseObject.put("email", object.getEmail());
-//        parseObject.put("telephone", object.getTelephone());
-//        parseObject.put("comments", object.getComments());
-//        parseObject.put("typeEvaluation", object.getTypeEvaluation());
-//        parseObject.put("noteKnowledge", object.getNoteKnowledge());
-//        parseObject.put("noteCommunication", object.getNoteCommunication());
-//        parseObject.put("noteCommitment", object.getNoteCommitment());
-//        parseObject.put("noteCordiality", object.getNoteCordiality());
-//        parseObject.put("satisfaction", object.getSatisfaction());
         parseObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
