@@ -1,4 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +8,11 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pie_chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.github.mikephil.charting.charts.PieChart>
+        android:layout_height="300dp"></com.github.mikephil.charting.charts.PieChart>
 
-</FrameLayout>
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></com.github.mikephil.charting.charts.PieChart>
+
+</LinearLayout>

@@ -1,5 +1,7 @@
 package br.harlan.satisfactionsurvey.model;
 
+import com.github.mikephil.charting.data.ChartData;
+
 public class StatisticsModel extends BaseModel {
 
     //region Variables
@@ -35,7 +37,7 @@ public class StatisticsModel extends BaseModel {
 
     public StatisticsModel() {
         className = BaseModel.CLASS_NAME_STATISTICS;
-        setTotal(0);
+        setTotal(NO_READY);
     }
 
     //region Getters and Setters
@@ -264,11 +266,11 @@ public class StatisticsModel extends BaseModel {
     }
     //endregion Getters and Setters
 
-    public interface OnStatisticsChangeListener {
-        void onStatisticsChange(StatisticsModel statisticsModel);
-    }
+//    public interface OnStatisticsChangeListener {
+//        void onStatisticsChange(StatisticsModel statisticsModel);
+//    }
 
-    public interface OnDataChangeListener<T> {
-        void onDataChange(T data);
-    }
+//    public interface OnDataChangeListener<T extends ChartData> {
+//        void onDataChange(T data);
+//    }
 }

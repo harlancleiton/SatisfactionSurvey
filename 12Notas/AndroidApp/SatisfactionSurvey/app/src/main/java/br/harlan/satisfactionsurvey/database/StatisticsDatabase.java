@@ -18,7 +18,7 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
 
     StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
 
-    private StatisticsModel.OnStatisticsChangeListener statisticsListener = null;
+    private StatisticsDatabase.OnStatisticsChangeListener statisticsListener = null;
 
     public StatisticsDatabase(IDatabaseServices databaseServices) {
         super(databaseServices);
@@ -64,7 +64,11 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
 
     }
 
-    public void setStatisticsListener(StatisticsModel.OnStatisticsChangeListener statisticsListener) {
+    public void setStatisticsListener(StatisticsDatabase.OnStatisticsChangeListener statisticsListener) {
         this.statisticsListener = statisticsListener;
+    }
+
+    public interface OnStatisticsChangeListener {
+        void onStatisticsChange(StatisticsModel statisticsModel);
     }
 }

@@ -6,10 +6,10 @@ public class StatisticsSingleton {
 
     private static StatisticsModel statisticsModel;
 
-    private StatisticsSingleton(){}
+    private StatisticsSingleton() { }
 
-    public static StatisticsModel getInstance(){
-        if(statisticsModel == null) {
+    public static StatisticsModel getInstance() {
+        if (statisticsModel == null) {
             statisticsModel = new StatisticsModel();
         }
         return statisticsModel;

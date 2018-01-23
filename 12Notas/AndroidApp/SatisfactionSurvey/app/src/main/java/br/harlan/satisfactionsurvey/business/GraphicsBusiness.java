@@ -1,5 +1,7 @@
 package br.harlan.satisfactionsurvey.business;
 
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -17,7 +19,7 @@ import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 public class GraphicsBusiness extends BaseBusiness {
 
 //    StatisticsBusiness statisticsBusiness;
-    StatisticsModel.OnDataChangeListener onDataChangeListener;
+    GraphicsTest.OnDataChangeListener onDataChangeListener;
     StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
 
     public GraphicsBusiness(IMessageServices messageServices, INavigationServices navigationServices) {
@@ -25,13 +27,13 @@ public class GraphicsBusiness extends BaseBusiness {
 //        statisticsBusiness = new StatisticsBusiness(messageServices, navigationServices);
     }
 
-    public void getPieDataSatisfaction(StatisticsModel.OnDataChangeListener<PieData> onDataChangeListener) {
+    public void getPieDataSatisfaction(GraphicsTest.OnDataChangeListener<PieData> onDataChangeListener) {
         this.onDataChangeListener = onDataChangeListener;
         if(statisticsReady()){
             createGraphicsPieDataSatisfaction(statisticsModel);
         } else {
             final StatisticsDatabase statisticsDatabase = new StatisticsDatabase(databaseServices);
-            statisticsDatabase.setStatisticsListener(new StatisticsModel.OnStatisticsChangeListener() {
+            statisticsDatabase.setStatisticsListener(new StatisticsDatabase.OnStatisticsChangeListener() {
                 @Override
                 public void onStatisticsChange(StatisticsModel statisticsModel) {
                     createGraphicsPieDataSatisfaction(statisticsModel);

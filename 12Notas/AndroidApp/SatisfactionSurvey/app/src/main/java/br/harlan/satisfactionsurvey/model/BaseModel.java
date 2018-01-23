@@ -15,6 +15,7 @@ public class BaseModel {
 
     public final static String CLASS_NAME_EVALUATION =  "Evaluations";
     public final static String CLASS_NAME_STATISTICS =  "Statistics";
+    public final static int NO_READY = -1;
 
     public String getObjectId() {
         return objectId;
