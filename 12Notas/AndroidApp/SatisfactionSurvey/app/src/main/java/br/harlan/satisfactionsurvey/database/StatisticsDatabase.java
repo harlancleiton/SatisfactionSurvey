@@ -1,5 +1,9 @@
 package br.harlan.satisfactionsurvey.database;
 
+import com.parse.CountCallback;
+import com.parse.GetCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -7,8 +11,14 @@ import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
+import br.harlan.satisfactionsurvey.model.services.ParseObjectToObjectModel;
+import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
 public class StatisticsDatabase extends BaseDatabase implements ICRUD<StatisticsModel> {
+
+    StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
+
+    private StatisticsModel.OnStatisticsChangeListener statisticsListener = null;
 
     public StatisticsDatabase(IDatabaseServices databaseServices) {
         super(databaseServices);
@@ -31,7 +41,17 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
 
     @Override
     public void retrieveAll(String className) {
-
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_STATISTICS);
+        parseQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    statisticsModel = (StatisticsModel) ParseObjectToObjectModel.getObjectModel(object);
+                    if (statisticsListener != null)
+                        statisticsListener.onStatisticsChange(statisticsModel);
+                }
+            }
+        });
     }
 
     @Override
@@ -44,10 +64,7 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
 
     }
 
-    public StatisticsDatabase getStatistics(StatisticsModel.StatisticsChange statisticsChange) {
-        ParseQuery<ParseObject> totalQuery = ParseQuery.getQuery(BaseModel.CLASS_NAME_EVALUATION);
-        totalQuery.countInBackground();
-
-        return null;
+    public void setStatisticsListener(StatisticsModel.OnStatisticsChangeListener statisticsListener) {
+        this.statisticsListener = statisticsListener;
     }
 }

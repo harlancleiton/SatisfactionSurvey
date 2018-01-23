@@ -6,16 +6,8 @@ import android.view.View;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 
@@ -23,13 +15,13 @@ import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.GraphicsBusiness;
 import br.harlan.satisfactionsurvey.model.GraphicModel;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
-import br.harlan.satisfactionsurvey.observer.StatisticsObserver;
 
 public class GraphicsFragment extends BaseFragment {
 
     //region Variables
-    private PieChart pieChart;
-    private PieData mPieData;
+    private PieChart pieChartSatisfaction;
+
+    private final static int TOTAL_GRAPHICS = 1;
     //endregion Variables
 
     public GraphicsFragment() {
@@ -39,23 +31,26 @@ public class GraphicsFragment extends BaseFragment {
     //region Methods
     @Override
     protected void initializeComponents(View rootView) {
-        pieChart = rootView.findViewById(R.id.pie_chart);
+        pieChartSatisfaction = rootView.findViewById(R.id.pie_chart);
         //createGraphic();
     }
 
     @Override
     protected void addEvents() {
         //final PieData[] mPieData = new PieData[1];
-        new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction(new StatisticsModel.StatisticsChange() {
+        new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction(new StatisticsModel.OnDataChangeListener<PieData>() {
             @Override
-            public void statisticsReady(StatisticsModel statisticsModel) {
-
-            }
-
-            @Override
-            public void pieDataReady(PieData pieData) {
-                mPieData = pieData;
-                pieChart.setData(pieData);
+            public void onDataChange(PieData data) {
+                pieChartSatisfaction.setData(data);
+                pieChartSatisfaction.setDrawCenterText(true);
+                pieChartSatisfaction.getDescription().setEnabled(false);
+                pieChartSatisfaction.setExtraOffsets(5, 10, 5, 5);
+                pieChartSatisfaction.setDragDecelerationFrictionCoef(0.95f);
+                pieChartSatisfaction.setDrawHoleEnabled(true);
+                pieChartSatisfaction.setHoleColor(Color.WHITE);
+                pieChartSatisfaction.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
+                pieChartSatisfaction.setTransparentCircleRadius(60f);
+                pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
     }
@@ -72,27 +67,27 @@ public class GraphicsFragment extends BaseFragment {
         xValues.add("Carlos");
         GraphicModel graphicModel = new GraphicModel(yValues, xValues);
         PieData pieData = graphicModel.getPieData();
-        pieChart.setData(pieData);
-        pieChart.animateX(1000, Easing.EasingOption.EaseInCirc);
-        //pieChart.setUsePercentValues(true);
-        pieChart.setDrawCenterText(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
-        pieChart.setTransparentCircleRadius(60f);
-        pieChart.animateX(1000, Easing.EasingOption.EaseInCirc);
-        /*pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
-        pieChart.setTransparentCircleRadius(60f);
-        pieChart.animateX(1000, Easing.EasingOption.EaseInCirc);
+        pieChartSatisfaction.setData(pieData);
+        pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
+        //pieChartSatisfaction.setUsePercentValues(true);
+        pieChartSatisfaction.setDrawCenterText(true);
+        pieChartSatisfaction.getDescription().setEnabled(false);
+        pieChartSatisfaction.setExtraOffsets(5, 10, 5, 5);
+        pieChartSatisfaction.setDragDecelerationFrictionCoef(0.95f);
+        pieChartSatisfaction.setDrawHoleEnabled(true);
+        pieChartSatisfaction.setHoleColor(Color.WHITE);
+        pieChartSatisfaction.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
+        pieChartSatisfaction.setTransparentCircleRadius(60f);
+        pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
+        /*pieChartSatisfaction.setUsePercentValues(true);
+        pieChartSatisfaction.getDescription().setEnabled(false);
+        pieChartSatisfaction.setExtraOffsets(5, 10, 5, 5);
+        pieChartSatisfaction.setDragDecelerationFrictionCoef(0.95f);
+        pieChartSatisfaction.setDrawHoleEnabled(true);
+        pieChartSatisfaction.setHoleColor(Color.WHITE);
+        pieChartSatisfaction.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
+        pieChartSatisfaction.setTransparentCircleRadius(60f);
+        pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
         ArrayList<PieEntry> yValues = new ArrayList<>();
         yValues.add(new PieEntry(31f, "Harlan"));
         yValues.add(new PieEntry(17f, "Tiago"));
@@ -105,7 +100,7 @@ public class GraphicsFragment extends BaseFragment {
         PieData pieData = new PieData(pieDataSet);
         pieData.setValueTextSize(10f);
         pieData.setValueTextColor(getResources().getColor(R.color.colorAccent));
-        pieChart.setData(pieData);*/
+        pieChartSatisfaction.setData(pieData);*/
 
     }
     //region Methods

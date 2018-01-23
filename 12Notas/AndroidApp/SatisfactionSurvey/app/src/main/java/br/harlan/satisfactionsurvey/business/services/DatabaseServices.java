@@ -12,7 +12,7 @@ import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
-import br.harlan.satisfactionsurvey.model.ParseObjectToObjectModel;
+import br.harlan.satisfactionsurvey.model.services.ParseObjectToObjectModel;
 
 public class DatabaseServices implements IDatabaseServices {
 

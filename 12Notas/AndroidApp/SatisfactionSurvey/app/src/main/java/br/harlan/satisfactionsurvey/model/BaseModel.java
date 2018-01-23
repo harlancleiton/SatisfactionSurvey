@@ -14,6 +14,7 @@ public class BaseModel {
     protected OnDataChangeListener onDataChangeListener;
 
     public final static String CLASS_NAME_EVALUATION =  "Evaluations";
+    public final static String CLASS_NAME_STATISTICS =  "Statistics";
 
     public String getObjectId() {
         return objectId;
