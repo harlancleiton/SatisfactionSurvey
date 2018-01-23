@@ -1,10 +1,12 @@
 package br.harlan.satisfactionsurvey.business;
 
-import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -16,53 +18,117 @@ import br.harlan.satisfactionsurvey.database.StatisticsDatabase;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
 import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
-public class GraphicsBusiness extends BaseBusiness {
+public class GraphicsBusiness<T extends ChartData, C extends Chart> extends BaseBusiness {
 
-//    StatisticsBusiness statisticsBusiness;
-    GraphicsTest.OnDataChangeListener onDataChangeListener;
-    StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
+    //region Variables
+    T data;
+    int chartDataType;
+    int dataType;
+    List<Integer> yValues = new ArrayList<>();
+    List<String> xValues = new ArrayList<>();
+    DataSet dataSet;
+    String chartLabel;
+    StatisticsModel mStatisticsModel = StatisticsSingleton.getInstance();
+    OnDataChangeListener onDataChangeListener;
+    //endregion Variables
 
-    public GraphicsBusiness(IMessageServices messageServices, INavigationServices navigationServices) {
+    public GraphicsBusiness(IMessageServices messageServices, INavigationServices navigationServices, int chartDataType, int dataType) {
         super(messageServices, navigationServices);
-//        statisticsBusiness = new StatisticsBusiness(messageServices, navigationServices);
+        this.chartDataType = chartDataType;
+        this.dataType = dataType;
     }
 
-    public void getPieDataSatisfaction(GraphicsTest.OnDataChangeListener<PieData> onDataChangeListener) {
+    public void loadChartData(OnDataChangeListener onDataChangeListener) {
         this.onDataChangeListener = onDataChangeListener;
-        if(statisticsReady()){
-            createGraphicsPieDataSatisfaction(statisticsModel);
-        } else {
-            final StatisticsDatabase statisticsDatabase = new StatisticsDatabase(databaseServices);
+        if (checkStatistics())
+            //loadData();
+            createChartDataType();
+        else {
+            StatisticsDatabase statisticsDatabase = new StatisticsDatabase(databaseServices);
             statisticsDatabase.setStatisticsListener(new StatisticsDatabase.OnStatisticsChangeListener() {
                 @Override
                 public void onStatisticsChange(StatisticsModel statisticsModel) {
-                    createGraphicsPieDataSatisfaction(statisticsModel);
+                    mStatisticsModel = statisticsModel;
+                    createChartDataType();
                 }
             });
             statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS);
         }
     }
 
-    private boolean statisticsReady() {
-        return (statisticsModel.getTotal() > 0);
+    private void createChartDataType() {
+        loadYValues();
+        loadXValues();
+        List entries;
+        if (isBarDataChart(data)){
+
+        }
+        else {
+            entries = new ArrayList<PieEntry>();
+            for (int i = 0; i < xValues.size(); i++)
+                entries.add(new PieEntry(yValues.get(i), xValues.get(i)));
+            dataSet = new PieDataSet(entries, chartLabel);
+            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            data = (T) new PieData((IPieDataSet) dataSet);
+        }
+        onDataChangeListener.onDataChange(data);
     }
 
-    private void createGraphicsPieDataSatisfaction(StatisticsModel statisticsModel) {
-        List<Integer> yValues = new ArrayList<>();
-        List<String> xValues = new ArrayList<>();
-        yValues.add(statisticsModel.getSatisfied());
-        yValues.add(statisticsModel.getIndifferent());
-        yValues.add(statisticsModel.getDissatisfied());
-        xValues.add("Satisfeitos");
-        xValues.add("Indiferentes");
-        xValues.add("Insatisfeitos");
-        List<PieEntry> pieEntries = new ArrayList<>();
-        for (int i = 0; i < xValues.size(); i++){
-            pieEntries.add(new PieEntry(yValues.get(i), xValues.get(i)));
+    private void loadXValues() {
+        if (dataType == GraphicsBusiness.SATISFACTION_TYPE) {
+            chartLabel = "Satisfação";
+            xValues.add("Satisfeitos");
+            xValues.add("Indiferentes");
+            xValues.add("Insatisfeitos");
+        } else if(dataType == GraphicsBusiness.COMMENT_TYPE){
+            chartLabel = "Tipos de comentários";
+            xValues.add("Elogio");
+            xValues.add("Dúvida");
+            xValues.add("Crítica");
+            xValues.add("Sugestão");
         }
-        PieDataSet pieDataSet = new PieDataSet(pieEntries, "Satisfação");
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        PieData pieData = new PieData(pieDataSet);
-        onDataChangeListener.onDataChange(pieData);
+    }
+
+    private void loadYValues() {
+        if (dataType == GraphicsBusiness.SATISFACTION_TYPE) {
+            yValues.add(mStatisticsModel.getSatisfied());
+            yValues.add(mStatisticsModel.getIndifferent());
+            yValues.add(mStatisticsModel.getDissatisfied());
+        } else if (dataType == GraphicsBusiness.COMMENT_TYPE){
+            yValues.add(mStatisticsModel.getCompliment());
+            yValues.add(mStatisticsModel.getDoubt());
+            yValues.add(mStatisticsModel.getCriticims());
+            yValues.add(mStatisticsModel.getSuggestion());
+        }
+    }
+
+    private void loadData() {
+        if (isBarDataChart(data))
+            loadBarData();
+        else loadPieData();
+    }
+
+    private boolean checkStatistics() {
+        return mStatisticsModel.getTotal() != StatisticsModel.NO_READY;
+    }
+
+    private void loadBarData() {
+
+    }
+
+    private void loadPieData() {
+
+    }
+
+    private boolean isBarDataChart(T data) {
+        return chartDataType == BAR_DATA;
+    }
+
+    private boolean isPieDataChart(T data) {
+        return chartDataType == PIE_DATA;
+    }
+
+    public interface OnDataChangeListener<T extends ChartData> {
+        void onDataChange(T chartData);
     }
 }

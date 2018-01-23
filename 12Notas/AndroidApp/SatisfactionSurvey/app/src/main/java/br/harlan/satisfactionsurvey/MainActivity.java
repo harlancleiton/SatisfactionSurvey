@@ -15,6 +15,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import br.harlan.satisfactionsurvey.view.HomeActivity;
+import br.harlan.satisfactionsurvey.view.Main2Activity;
 import br.harlan.satisfactionsurvey.view.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Parse.initialize(this);
         ParseInstallation.getCurrentInstallation().saveInBackground();
-        startActivity(new Intent(this, HomeActivity.class ));
+        startActivity(new Intent(this, Main2Activity.class));
+        //startActivity(new Intent(this, HomeActivity.class ));
     }
 }

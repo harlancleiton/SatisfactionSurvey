@@ -6,19 +6,13 @@ import android.view.View;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.ChartData;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.GraphicsBusiness;
-import br.harlan.satisfactionsurvey.business.GraphicsTest;
-import br.harlan.satisfactionsurvey.business.StatisticsBusiness;
 import br.harlan.satisfactionsurvey.model.GraphicModel;
-import br.harlan.satisfactionsurvey.model.StatisticsModel;
 
 public class GraphicsFragment extends BaseFragment {
 
@@ -44,9 +38,9 @@ public class GraphicsFragment extends BaseFragment {
     @Override
     protected void addEvents() {
         //final PieData[] mPieData = new PieData[1];
-        //new GraphicsBusiness(messageServices, navigationServices).getPieDataSatisfaction(new GraphicsTest.OnDataChangeListener<PieData>() {
-        GraphicsTest<PieData, PieChart> graphicsTest = new GraphicsTest(messageServices, navigationServices, GraphicsTest.PIE_DATA, GraphicsTest.SATISFACTION_TYPE);
-        graphicsTest.loadChartData(new GraphicsTest.OnDataChangeListener<PieData>() {
+        //new GraphicsBusiness_old(messageServices, navigationServices).getPieDataSatisfaction(new GraphicsBusiness.OnDataChangeListener<PieData>() {
+        GraphicsBusiness<PieData, PieChart> graphicsBusiness = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.SATISFACTION_TYPE);
+        graphicsBusiness.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChartSatisfaction.setData(chartData);
@@ -61,8 +55,8 @@ public class GraphicsFragment extends BaseFragment {
                 pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
-        GraphicsTest<PieData, PieChart> graphicsTest1 = new GraphicsTest(messageServices, navigationServices, GraphicsTest.PIE_DATA, GraphicsTest.COMMENT_TYPE);
-        graphicsTest1.loadChartData(new GraphicsTest.OnDataChangeListener<PieData>() {
+        GraphicsBusiness<PieData, PieChart> graphicsBusiness1 = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.COMMENT_TYPE);
+        graphicsBusiness1.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChart2.setData(chartData);

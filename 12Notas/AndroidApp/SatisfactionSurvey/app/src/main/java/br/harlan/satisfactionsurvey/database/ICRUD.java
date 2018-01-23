@@ -1,7 +1,5 @@
 package br.harlan.satisfactionsurvey.database;
 
-import java.util.ArrayList;
-
 import br.harlan.satisfactionsurvey.model.BaseModel;
 
 public interface ICRUD<T extends BaseModel> {
