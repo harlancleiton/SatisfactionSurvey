@@ -102,22 +102,8 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
         }
     }
 
-    private void loadData() {
-        if (isBarDataChart(data))
-            loadBarData();
-        else loadPieData();
-    }
-
     private boolean checkStatistics() {
         return mStatisticsModel.getTotal() != StatisticsModel.NO_READY;
-    }
-
-    private void loadBarData() {
-
-    }
-
-    private void loadPieData() {
-
     }
 
     private boolean isBarDataChart(T data) {
