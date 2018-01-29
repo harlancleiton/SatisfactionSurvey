@@ -5,7 +5,6 @@ import com.parse.ParseObject;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
-import br.harlan.satisfactionsurvey.singleton.FirebaseSingleton;
 import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
 public class ParseObjectToObjectModel {
@@ -42,11 +41,11 @@ public class ParseObjectToObjectModel {
         statisticsModel.setCordiality3(parseObject.getInt("cordiality3"));
         statisticsModel.setCordiality4(parseObject.getInt("cordiality4"));
         statisticsModel.setCordiality5(parseObject.getInt("cordiality5"));
-        statisticsModel.setKnowlegde1(parseObject.getInt("knowlegde1"));
-        statisticsModel.setKnowlegde2(parseObject.getInt("knowlegde2"));
-        statisticsModel.setKnowlegde3(parseObject.getInt("knowlegde3"));
-        statisticsModel.setKnowlegde4(parseObject.getInt("knowlegde4"));
-        statisticsModel.setKnowlegde5(parseObject.getInt("knowlegde5"));
+        statisticsModel.setKnowledge1(parseObject.getInt("knowledge1"));
+        statisticsModel.setKnowledge2(parseObject.getInt("knowledge2"));
+        statisticsModel.setKnowledge3(parseObject.getInt("knowledge3"));
+        statisticsModel.setKnowledge4(parseObject.getInt("knowledge4"));
+        statisticsModel.setKnowledge5(parseObject.getInt("knowledge5"));
         statisticsModel.setCriticims(parseObject.getInt("criticims"));
         statisticsModel.setDoubt(parseObject.getInt("doubt"));
         statisticsModel.setCompliment(parseObject.getInt("compliment"));

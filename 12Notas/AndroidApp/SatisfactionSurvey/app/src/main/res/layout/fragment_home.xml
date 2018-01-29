@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.harlan.satisfactionsurvey.view.HomeActivity$PlaceholderFragment">
+    tools:context="br.harlan.satisfactionsurvey.view.Home_oldActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_label"

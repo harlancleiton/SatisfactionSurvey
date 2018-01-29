@@ -7,6 +7,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.Date;
+
 import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
@@ -41,12 +43,29 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
 
     @Override
     public void retrieveAll(String className) {
-        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_STATISTICS);
+        final ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_STATISTICS);
         parseQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     statisticsModel = (StatisticsModel) ParseObjectToObjectModel.getObjectModel(object);
+                    if (statisticsListener != null)
+                        statisticsListener.onStatisticsChange(statisticsModel);
+                }
+            }
+        });
+    }
+
+    public void retrieveAll(String className, Date origin, Date fim) {
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_EVALUATION);
+        parseQuery.whereGreaterThanOrEqualTo("createAt", origin);
+        parseQuery.whereLessThanOrEqualTo("createAt", fim);
+        parseQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    StatisticsModel mStatisticsModel = new StatisticsModel();
+                    mStatisticsModel = (StatisticsModel) ParseObjectToObjectModel.getObjectModel(object);
                     if (statisticsListener != null)
                         statisticsListener.onStatisticsChange(statisticsModel);
                 }

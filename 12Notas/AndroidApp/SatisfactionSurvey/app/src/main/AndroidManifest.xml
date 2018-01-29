@@ -31,10 +31,14 @@
         </activity>
         <activity android:name=".view.SearchActivity" />
         <activity
-            android:name=".view.HomeActivity"
+            android:name=".view.Home_oldActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.Main2Activity"></activity>
+        <activity android:name=".view.Main2Activity" />
+        <activity
+            android:name=".view.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

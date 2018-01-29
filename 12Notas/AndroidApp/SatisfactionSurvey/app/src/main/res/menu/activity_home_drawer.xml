@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_note_add"
+            android:icon="@drawable/ic_action_note_add_light"
+            android:title="@string/tab_text_note_add" />
+        <item
+            android:id="@+id/nav_historic"
+            android:icon="@drawable/ic_action_historic_light"
+            android:title="@string/tab_text_historic" />
+        <item
+            android:id="@+id/nav_graphics"
+            android:icon="@drawable/ic_action_graphics_light"
+            android:title="@string/tab_text_graphics" />
+    </group>
+
+    <item android:title="Sobre">
+        <menu>
+            <item
+                android:id="@+id/nav_12notas"
+                android:icon="@drawable/ic_action_logo12_light"
+                android:title="12° Ofício de Notas" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_action_help_outline_light"
+                android:title="Ajuda" />
+        </menu>
+    </item>
+
+</menu>

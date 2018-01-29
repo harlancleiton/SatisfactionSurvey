@@ -1,7 +1,5 @@
 package br.harlan.satisfactionsurvey.model;
 
-import com.github.mikephil.charting.data.ChartData;
-
 public class StatisticsModel extends BaseModel {
 
     //region Variables
@@ -13,11 +11,11 @@ public class StatisticsModel extends BaseModel {
     int doubt;
     int suggestion;
     int criticims;
-    int knowlegde1;
-    int knowlegde2;
-    int knowlegde3;
-    int knowlegde4;
-    int knowlegde5;
+    int knowledge1;
+    int knowledge2;
+    int knowledge3;
+    int knowledge4;
+    int knowledge5;
     int communication1;
     int communication2;
     int communication3;
@@ -105,44 +103,44 @@ public class StatisticsModel extends BaseModel {
         this.criticims = criticims;
     }
 
-    public int getKnowlegde1() {
-        return knowlegde1;
+    public int getKnowledge1() {
+        return knowledge1;
     }
 
-    public void setKnowlegde1(int knowlegde1) {
-        this.knowlegde1 = knowlegde1;
+    public void setKnowledge1(int knowledge1) {
+        this.knowledge1 = knowledge1;
     }
 
-    public int getKnowlegde2() {
-        return knowlegde2;
+    public int getKnowledge2() {
+        return knowledge2;
     }
 
-    public void setKnowlegde2(int knowlegde2) {
-        this.knowlegde2 = knowlegde2;
+    public void setKnowledge2(int knowledge2) {
+        this.knowledge2 = knowledge2;
     }
 
-    public int getKnowlegde3() {
-        return knowlegde3;
+    public int getKnowledge3() {
+        return knowledge3;
     }
 
-    public void setKnowlegde3(int knowlegde3) {
-        this.knowlegde3 = knowlegde3;
+    public void setKnowledge3(int knowledge3) {
+        this.knowledge3 = knowledge3;
     }
 
-    public int getKnowlegde4() {
-        return knowlegde4;
+    public int getKnowledge4() {
+        return knowledge4;
     }
 
-    public void setKnowlegde4(int knowlegde4) {
-        this.knowlegde4 = knowlegde4;
+    public void setKnowledge4(int knowledge4) {
+        this.knowledge4 = knowledge4;
     }
 
-    public int getKnowlegde5() {
-        return knowlegde5;
+    public int getKnowledge5() {
+        return knowledge5;
     }
 
-    public void setKnowlegde5(int knowlegde5) {
-        this.knowlegde5 = knowlegde5;
+    public void setKnowledge5(int knowledge5) {
+        this.knowledge5 = knowledge5;
     }
 
     public int getCommunication1() {

@@ -28,7 +28,7 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="tab_text_note_add">Novo</string>
+    <string name="tab_text_note_add">Avaliação</string>
     <string name="tab_text_graphics">Gráficos</string>
     <string name="tab_text_historic">Histórico</string>
     <string name="dissatisfied">Insatisfeito</string>
@@ -43,4 +43,10 @@
         <item>Crítica</item>
         <item>Sugestão</item>
     </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

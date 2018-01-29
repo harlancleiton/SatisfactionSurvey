@@ -1,6 +1,11 @@
 package br.harlan.satisfactionsurvey.business;
 
+import android.graphics.Color;
+
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.PieData;
@@ -60,15 +65,30 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
         loadYValues();
         loadXValues();
         List entries;
-        if (isBarDataChart(data)){
-
-        }
-        else {
+        if (isBarDataChart(data)) {
+            ArrayList<BarEntry> barEntries = new ArrayList<>();
+            barEntries.add(new BarEntry(1, mStatisticsModel.getCordiality1()));
+            barEntries.add(new BarEntry(2, mStatisticsModel.getCordiality2()));
+            barEntries.add(new BarEntry(3, mStatisticsModel.getCordiality3()));
+            barEntries.add(new BarEntry(4, mStatisticsModel.getCordiality4()));
+            barEntries.add(new BarEntry(5, mStatisticsModel.getCordiality5()));
+            ArrayList<BarEntry> barEntries1 = new ArrayList<>();
+            barEntries.add(new BarEntry(6, mStatisticsModel.getKnowledge1()));
+            barEntries.add(new BarEntry(7, mStatisticsModel.getKnowledge2()));
+            barEntries.add(new BarEntry(8, mStatisticsModel.getKnowledge3()));
+            barEntries.add(new BarEntry(9, mStatisticsModel.getKnowledge4()));
+            barEntries.add(new BarEntry(10, mStatisticsModel.getKnowledge5()));
+            BarDataSet barDataSet = new BarDataSet(barEntries, "Cordialidade");
+            BarDataSet barDataSet1 = new BarDataSet(barEntries1, "Conhecimento");
+            barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
+            barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
+            data = (T) new BarData(barDataSet, barDataSet1);
+        } else {
             entries = new ArrayList<PieEntry>();
             for (int i = 0; i < xValues.size(); i++)
                 entries.add(new PieEntry(yValues.get(i), xValues.get(i)));
             dataSet = new PieDataSet(entries, chartLabel);
-            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            dataSet.setColors(ColorTemplate.PASTEL_COLORS);
             data = (T) new PieData((IPieDataSet) dataSet);
         }
         onDataChangeListener.onDataChange(data);
@@ -80,12 +100,17 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
             xValues.add("Satisfeitos");
             xValues.add("Indiferentes");
             xValues.add("Insatisfeitos");
-        } else if(dataType == GraphicsBusiness.COMMENT_TYPE){
+        } else if (dataType == GraphicsBusiness.COMMENT_TYPE) {
             chartLabel = "Tipos de comentários";
             xValues.add("Elogio");
             xValues.add("Dúvida");
             xValues.add("Crítica");
             xValues.add("Sugestão");
+        } else if (dataType == GraphicsBusiness.NOTE_TYPE) {
+            xValues.add("Conhecimento");
+            xValues.add("Comprometimento");
+            xValues.add("Comunicação");
+            xValues.add("Cordialidade");
         }
     }
 
@@ -94,11 +119,20 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
             yValues.add(mStatisticsModel.getSatisfied());
             yValues.add(mStatisticsModel.getIndifferent());
             yValues.add(mStatisticsModel.getDissatisfied());
-        } else if (dataType == GraphicsBusiness.COMMENT_TYPE){
+        } else if (dataType == GraphicsBusiness.COMMENT_TYPE) {
             yValues.add(mStatisticsModel.getCompliment());
             yValues.add(mStatisticsModel.getDoubt());
             yValues.add(mStatisticsModel.getCriticims());
             yValues.add(mStatisticsModel.getSuggestion());
+        } else if (dataType == GraphicsBusiness.NOTE_TYPE) {
+            yValues.add(mStatisticsModel.getCordiality1());
+            yValues.add(mStatisticsModel.getCordiality2());
+            yValues.add(mStatisticsModel.getCordiality3());
+            yValues.add(mStatisticsModel.getCordiality4());
+            yValues.add(mStatisticsModel.getCommitment1());
+            yValues.add(mStatisticsModel.getCommitment2());
+            yValues.add(mStatisticsModel.getCommitment3());
+            yValues.add(mStatisticsModel.getCommitment4());
         }
     }
 
