@@ -15,6 +15,7 @@ import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.harlan.satisfactionsurvey.business.services.IMessageServices;
@@ -34,6 +35,7 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
     DataSet dataSet;
     String chartLabel;
     StatisticsModel mStatisticsModel = StatisticsSingleton.getInstance();
+    StatisticsDatabase statisticsDatabase;
     OnDataChangeListener onDataChangeListener;
     //endregion Variables
 
@@ -49,7 +51,7 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
             //loadData();
             createChartDataType();
         else {
-            StatisticsDatabase statisticsDatabase = new StatisticsDatabase(databaseServices);
+            statisticsDatabase = new StatisticsDatabase(databaseServices);
             statisticsDatabase.setStatisticsListener(new StatisticsDatabase.OnStatisticsChangeListener() {
                 @Override
                 public void onStatisticsChange(StatisticsModel statisticsModel) {
@@ -146,6 +148,10 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
 
     private boolean isPieDataChart(T data) {
         return chartDataType == PIE_DATA;
+    }
+
+    public void onData(Date initialDate, Date finalDate) {
+        statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
     }
 
     public interface OnDataChangeListener<T extends ChartData> {

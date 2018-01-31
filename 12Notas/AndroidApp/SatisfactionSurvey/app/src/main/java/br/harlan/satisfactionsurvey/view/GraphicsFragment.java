@@ -2,7 +2,6 @@ package br.harlan.satisfactionsurvey.view;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -13,33 +12,37 @@ import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.GraphicsBusiness;
-import br.harlan.satisfactionsurvey.model.GraphicModel;
+import br.harlan.satisfactionsurvey.model.StatisticsModel;
+import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
 public class GraphicsFragment extends BaseFragment {
 
     //region Variables
     private PieChart pieChartSatisfaction;
-    private PieChart pieChart2;
+    private PieChart pieChartType;
     private BarChart barChart4Cs;
-    private CardView cvDateOrigin;
-    private CardView cvDateFim;
-    private AppCompatTextView tvDateOrigin;
-    private AppCompatTextView tvDateOFim;
+    private CardView cvInitialDate;
+    private CardView cvFinalDate;
+    private AppCompatTextView tvInitialDate;
+    private AppCompatTextView tvFinalDate;
+    GraphicsBusiness<PieData, PieChart> graphicsSatisfaction;
+    GraphicsBusiness<PieData, PieChart> graphicsType;
+    GraphicsBusiness<BarData, BarChart> graphics4Cs;
     int year;
     int month;
     int day;
+    Date initialDate;
+    Date finalDate;
 
-    private final static int TOTAL_GRAPHICS = 1;
+    private final static int TOTAL_GRAPHICS = 3;
     //endregion Variables
 
     public GraphicsFragment() {
@@ -49,58 +52,57 @@ public class GraphicsFragment extends BaseFragment {
     //region Methods
     @Override
     protected void initializeComponents(View rootView) {
-        pieChartSatisfaction = rootView.findViewById(R.id.pie_chart);
-        pieChart2 = rootView.findViewById(R.id.pie_chart2);
+        pieChartSatisfaction = rootView.findViewById(R.id.pie_chart_satisfaction);
+        pieChartType = rootView.findViewById(R.id.pie_chart_type);
         barChart4Cs = rootView.findViewById(R.id.barchart_4c);
-        cvDateOrigin = rootView.findViewById(R.id.cv_date_origin);
-        cvDateFim = rootView.findViewById(R.id.cv_date_fim);
-        tvDateOrigin = rootView.findViewById(R.id.tv_date_origin);
-        tvDateOFim = rootView.findViewById(R.id.tv_date_fim);
+        cvInitialDate = rootView.findViewById(R.id.cv_initial_date);
+        cvFinalDate = rootView.findViewById(R.id.cv_final_date);
+        tvInitialDate = rootView.findViewById(R.id.tv_initial_date);
+        tvFinalDate = rootView.findViewById(R.id.tv_final_date);
         //createGraphic();
     }
 
     @Override
     protected void addEvents() {
-        cvDateOrigin.setOnClickListener(new View.OnClickListener() {
+        cvInitialDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 year = 2018;
                 month = 0;
                 day = 1;
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                final DatePickerDialog datePickerDialogInitial = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        tvDateOrigin.setText(i2 + "/" + 1 + i1 + "/" + i);
+                        tvInitialDate.setText(i2 + "/" + 1 + i1 + "/" + i);
+                        initialDate = getDate(i2, 1 + i1, i);
+                        updateCharts();
                     }
                 }, year, month, day);
-                datePickerDialog.show();
+                datePickerDialogInitial.show();
             }
         });
-        cvDateFim.setOnClickListener(new View.OnClickListener() {
+        cvFinalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 year = 2018;
                 month = 0;
                 day = 29;
-                final int yearChoise;
-                int monthChoise;
-                int dayChoise;
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialogFinal = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         Log.i("i", String.valueOf(i));
                         Log.i("i1", String.valueOf(i1));
                         Log.i("i2", String.valueOf(i2));
-                        tvDateOFim.setText(i2 + "/" + 1 + i1 + "/" + i);
+                        tvFinalDate.setText(i2 + "/" + 1 + i1 + "/" + i);
+                        finalDate = getDate(i2, 1 + i1, i);
+                        updateCharts();
                     }
                 }, year, month, day);
-                datePickerDialog.show();
+                datePickerDialogFinal.show();
             }
         });
-        //final PieData[] mPieData = new PieData[1];
-        //new GraphicsBusiness_old(messageServices, navigationServices).getPieDataSatisfaction(new GraphicsBusiness.OnDataChangeListener<PieData>() {
-        GraphicsBusiness<PieData, PieChart> graphicsBusiness = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.SATISFACTION_TYPE);
-        graphicsBusiness.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
+        graphicsSatisfaction = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.SATISFACTION_TYPE);
+        graphicsSatisfaction.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChartSatisfaction.setData(chartData);
@@ -115,24 +117,24 @@ public class GraphicsFragment extends BaseFragment {
                 pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
-        GraphicsBusiness<PieData, PieChart> graphicsBusiness1 = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.COMMENT_TYPE);
-        graphicsBusiness1.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
+        graphicsType = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.COMMENT_TYPE);
+        graphicsType.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
-                pieChart2.setData(chartData);
-                pieChart2.setDrawCenterText(true);
-                pieChart2.getDescription().setEnabled(false);
-                pieChart2.setExtraOffsets(5, 10, 5, 5);
-                pieChart2.setDragDecelerationFrictionCoef(0.95f);
-                pieChart2.setDrawHoleEnabled(true);
-                pieChart2.setHoleColor(Color.WHITE);
-                pieChart2.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
-                pieChart2.setTransparentCircleRadius(60f);
-                pieChart2.animateX(1000, Easing.EasingOption.EaseInCirc);
+                pieChartType.setData(chartData);
+                pieChartType.setDrawCenterText(true);
+                pieChartType.getDescription().setEnabled(false);
+                pieChartType.setExtraOffsets(5, 10, 5, 5);
+                pieChartType.setDragDecelerationFrictionCoef(0.95f);
+                pieChartType.setDrawHoleEnabled(true);
+                pieChartType.setHoleColor(Color.WHITE);
+                pieChartType.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
+                pieChartType.setTransparentCircleRadius(60f);
+                pieChartType.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
-        GraphicsBusiness<BarData, BarChart> graphicsBusiness2 = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.BAR_DATA, GraphicsBusiness.NOTE_TYPE);
-        graphicsBusiness2.loadChartData(new GraphicsBusiness.OnDataChangeListener<BarData>() {
+        graphics4Cs = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.BAR_DATA, GraphicsBusiness.NOTE_TYPE);
+        graphics4Cs.loadChartData(new GraphicsBusiness.OnDataChangeListener<BarData>() {
             @Override
             public void onDataChange(BarData chartData) {
                 barChart4Cs.setData(chartData);
@@ -151,9 +153,22 @@ public class GraphicsFragment extends BaseFragment {
             }
         });
     }
+
+    private void updateCharts() {
+        StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
+        statisticsModel.setDoubt(100);
+        //pieChartType.notifyDataSetChanged();
+        graphicsSatisfaction.onData(initialDate, finalDate);
+
+    }
+
+    private Date getDate(int year, int month, int date) {
+        Date _date = new Date(year, month, day);
+        return _date;
+    }
     //region Methods
 
-    class AxisValueFormatter implements IAxisValueFormatter {
+    private class AxisValueFormatter implements IAxisValueFormatter {
 
         String[] mValues;
 
