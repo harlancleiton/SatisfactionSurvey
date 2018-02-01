@@ -17,6 +17,10 @@ public class ParseObjectToObjectModel {
         } else if (parseObject.getClassName().equals(BaseModel.CLASS_NAME_STATISTICS)){
             baseModel = getStatisticsModel(parseObject);
         }
+        baseModel.setClassName(parseObject.getClassName());
+        baseModel.setObjectId(parseObject.getObjectId());
+        baseModel.setCreatedAt(parseObject.getCreatedAt());
+        baseModel.setUpdatedAt(parseObject.getUpdatedAt());
         return baseModel;
     }
 
@@ -54,11 +58,7 @@ public class ParseObjectToObjectModel {
     }
 
     private static EvaluationModel getEvaluationModel(ParseObject parseObject) {
-        EvaluationModel evaluationModel = null;
-        evaluationModel = new EvaluationModel();
-        evaluationModel.setObjectId(parseObject.getObjectId());
-        evaluationModel.setCreatedAt(parseObject.getCreatedAt());
-        evaluationModel.setUpdatedAt(parseObject.getUpdatedAt());
+        EvaluationModel evaluationModel = new EvaluationModel();
         evaluationModel.setName(parseObject.getString("name"));
         evaluationModel.setCompany(parseObject.getString("company"));
         evaluationModel.setEmail(parseObject.getString("email"));

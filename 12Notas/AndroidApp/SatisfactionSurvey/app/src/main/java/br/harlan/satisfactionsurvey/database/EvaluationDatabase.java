@@ -9,6 +9,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.harlan.satisfactionsurvey.business.StatisticsBusiness;
@@ -72,6 +73,11 @@ public class EvaluationDatabase extends BaseDatabase implements ICRUD<Evaluation
                 databaseServices.retrieveComplete(objects, e);
             }
         });
+    }
+
+    @Override
+    public void retrieveAll(String className, Date initialDate, Date finalDate) {
+
     }
 
     @Override

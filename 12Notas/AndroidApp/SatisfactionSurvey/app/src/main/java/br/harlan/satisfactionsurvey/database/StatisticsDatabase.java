@@ -1,8 +1,9 @@
 package br.harlan.satisfactionsurvey.database;
 
+import android.util.Log;
+
 import com.parse.CountCallback;
 import com.parse.GetCallback;
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -10,8 +11,6 @@ import com.parse.ParseQuery;
 import java.util.Date;
 
 import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
-import br.harlan.satisfactionsurvey.model.BaseModel;
-import br.harlan.satisfactionsurvey.model.EvaluationModel;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
 import br.harlan.satisfactionsurvey.model.services.ParseObjectToObjectModel;
 import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
@@ -49,6 +48,7 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     statisticsModel = (StatisticsModel) ParseObjectToObjectModel.getObjectModel(object);
+                    Log.i("Date Statistics", statisticsModel.getCreatedAt().toString());
                     if (statisticsListener != null)
                         statisticsListener.onStatisticsChange(statisticsModel);
                 }
@@ -56,22 +56,37 @@ public class StatisticsDatabase extends BaseDatabase implements ICRUD<Statistics
         });
     }
 
-    public void retrieveAll(String className, Date origin, Date fim) {
+    int aux = 0;
+
+    @Override
+    public void retrieveAll(String className, Date initialDate, Date finalDate) {
         ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_EVALUATION);
-        parseQuery.whereGreaterThanOrEqualTo("createAt", origin);
-        parseQuery.whereLessThanOrEqualTo("createAt", fim);
-        parseQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+        parseQuery.whereGreaterThanOrEqualTo("createAt", initialDate);
+        parseQuery.whereLessThanOrEqualTo("createAt", finalDate);
+        parseQuery.countInBackground(new CountCallback() {
             @Override
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    StatisticsModel mStatisticsModel = new StatisticsModel();
-                    mStatisticsModel = (StatisticsModel) ParseObjectToObjectModel.getObjectModel(object);
-                    if (statisticsListener != null)
-                        statisticsListener.onStatisticsChange(statisticsModel);
-                }
+            public void done(int count, ParseException e) {
+                Log.i("Count", Integer.toString(count));
+            }
+        });
+        parseQuery.whereEqualTo("noteCommunication", 1).countInBackground(new CountCallback() {
+            @Override
+            public void done(int count, ParseException e) {
+                Log.i("noteCommunication1", Integer.toString(count));
+            }
+        });
+        parseQuery.whereEqualTo("noteCommunication", 2).countInBackground(new CountCallback() {
+            @Override
+            public void done(int count, ParseException e) {
+                Log.i("noteCommunication2", Integer.toString(count));
             }
         });
     }
+
+//    private void check() {
+//        if(aux == 11)
+//
+//    }
 
     @Override
     public void delete(String objectId, String className) {

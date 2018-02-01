@@ -19,11 +19,11 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import java.util.Date;
 
 import br.harlan.satisfactionsurvey.R;
-import br.harlan.satisfactionsurvey.business.GraphicsBusiness;
+import br.harlan.satisfactionsurvey.business.ChartBusiness;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
 import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
-public class GraphicsFragment extends BaseFragment {
+public class ChartFragment extends BaseFragment {
 
     //region Variables
     private PieChart pieChartSatisfaction;
@@ -33,9 +33,9 @@ public class GraphicsFragment extends BaseFragment {
     private CardView cvFinalDate;
     private AppCompatTextView tvInitialDate;
     private AppCompatTextView tvFinalDate;
-    GraphicsBusiness<PieData, PieChart> graphicsSatisfaction;
-    GraphicsBusiness<PieData, PieChart> graphicsType;
-    GraphicsBusiness<BarData, BarChart> graphics4Cs;
+    ChartBusiness<PieData, PieChart> graphicsSatisfaction;
+    ChartBusiness<PieData, PieChart> graphicsType;
+    ChartBusiness<BarData, BarChart> graphics4Cs;
     int year;
     int month;
     int day;
@@ -45,8 +45,8 @@ public class GraphicsFragment extends BaseFragment {
     private final static int TOTAL_GRAPHICS = 3;
     //endregion Variables
 
-    public GraphicsFragment() {
-        super(R.layout.fragment_graphics);
+    public ChartFragment() {
+        super(R.layout.fragment_chart);
     }
 
     //region Methods
@@ -101,8 +101,8 @@ public class GraphicsFragment extends BaseFragment {
                 datePickerDialogFinal.show();
             }
         });
-        graphicsSatisfaction = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.SATISFACTION_TYPE);
-        graphicsSatisfaction.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
+        graphicsSatisfaction = new ChartBusiness(messageServices, navigationServices, ChartBusiness.PIE_DATA, ChartBusiness.SATISFACTION_TYPE);
+        graphicsSatisfaction.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChartSatisfaction.setData(chartData);
@@ -117,8 +117,8 @@ public class GraphicsFragment extends BaseFragment {
                 pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
-        graphicsType = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.PIE_DATA, GraphicsBusiness.COMMENT_TYPE);
-        graphicsType.loadChartData(new GraphicsBusiness.OnDataChangeListener<PieData>() {
+        graphicsType = new ChartBusiness(messageServices, navigationServices, ChartBusiness.PIE_DATA, ChartBusiness.COMMENT_TYPE);
+        graphicsType.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChartType.setData(chartData);
@@ -133,8 +133,8 @@ public class GraphicsFragment extends BaseFragment {
                 pieChartType.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
-        graphics4Cs = new GraphicsBusiness(messageServices, navigationServices, GraphicsBusiness.BAR_DATA, GraphicsBusiness.NOTE_TYPE);
-        graphics4Cs.loadChartData(new GraphicsBusiness.OnDataChangeListener<BarData>() {
+        graphics4Cs = new ChartBusiness(messageServices, navigationServices, ChartBusiness.BAR_DATA, ChartBusiness.NOTE_TYPE);
+        graphics4Cs.loadChartData(new ChartBusiness.OnDataChangeListener<BarData>() {
             @Override
             public void onDataChange(BarData chartData) {
                 barChart4Cs.setData(chartData);
@@ -155,15 +155,14 @@ public class GraphicsFragment extends BaseFragment {
     }
 
     private void updateCharts() {
-        StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
-        statisticsModel.setDoubt(100);
         //pieChartType.notifyDataSetChanged();
         graphicsSatisfaction.onData(initialDate, finalDate);
-
     }
 
     private Date getDate(int year, int month, int date) {
-        Date _date = new Date(year, month, day);
+        Date _date = new Date(year, month, date);
+        Log.i("Get Year", Integer.toString(_date.getYear()));
+        Log.i("Get Date", _date.toString());
         return _date;
     }
     //region Methods

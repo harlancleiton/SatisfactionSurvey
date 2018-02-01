@@ -1,7 +1,5 @@
 package br.harlan.satisfactionsurvey.business;
 
-import android.graphics.Color;
-
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -20,11 +18,12 @@ import java.util.List;
 
 import br.harlan.satisfactionsurvey.business.services.IMessageServices;
 import br.harlan.satisfactionsurvey.business.services.INavigationServices;
+import br.harlan.satisfactionsurvey.database.EvaluationDatabase;
 import br.harlan.satisfactionsurvey.database.StatisticsDatabase;
 import br.harlan.satisfactionsurvey.model.StatisticsModel;
 import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
-public class GraphicsBusiness<T extends ChartData, C extends Chart> extends BaseBusiness {
+public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBusiness {
 
     //region Variables
     T data;
@@ -36,11 +35,13 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
     String chartLabel;
     StatisticsModel mStatisticsModel = StatisticsSingleton.getInstance();
     StatisticsDatabase statisticsDatabase;
+    EvaluationDatabase evaluationDatabase;
     OnDataChangeListener onDataChangeListener;
     //endregion Variables
 
-    public GraphicsBusiness(IMessageServices messageServices, INavigationServices navigationServices, int chartDataType, int dataType) {
+    public ChartBusiness(IMessageServices messageServices, INavigationServices navigationServices, int chartDataType, int dataType) {
         super(messageServices, navigationServices);
+        evaluationDatabase = new EvaluationDatabase(databaseServices);
         this.chartDataType = chartDataType;
         this.dataType = dataType;
     }
@@ -97,18 +98,18 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
     }
 
     private void loadXValues() {
-        if (dataType == GraphicsBusiness.SATISFACTION_TYPE) {
+        if (dataType == ChartBusiness.SATISFACTION_TYPE) {
             chartLabel = "Satisfação";
             xValues.add("Satisfeitos");
             xValues.add("Indiferentes");
             xValues.add("Insatisfeitos");
-        } else if (dataType == GraphicsBusiness.COMMENT_TYPE) {
+        } else if (dataType == ChartBusiness.COMMENT_TYPE) {
             chartLabel = "Tipos de comentários";
             xValues.add("Elogio");
             xValues.add("Dúvida");
             xValues.add("Crítica");
             xValues.add("Sugestão");
-        } else if (dataType == GraphicsBusiness.NOTE_TYPE) {
+        } else if (dataType == ChartBusiness.NOTE_TYPE) {
             xValues.add("Conhecimento");
             xValues.add("Comprometimento");
             xValues.add("Comunicação");
@@ -117,16 +118,16 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
     }
 
     private void loadYValues() {
-        if (dataType == GraphicsBusiness.SATISFACTION_TYPE) {
+        if (dataType == ChartBusiness.SATISFACTION_TYPE) {
             yValues.add(mStatisticsModel.getSatisfied());
             yValues.add(mStatisticsModel.getIndifferent());
             yValues.add(mStatisticsModel.getDissatisfied());
-        } else if (dataType == GraphicsBusiness.COMMENT_TYPE) {
+        } else if (dataType == ChartBusiness.COMMENT_TYPE) {
             yValues.add(mStatisticsModel.getCompliment());
             yValues.add(mStatisticsModel.getDoubt());
             yValues.add(mStatisticsModel.getCriticims());
             yValues.add(mStatisticsModel.getSuggestion());
-        } else if (dataType == GraphicsBusiness.NOTE_TYPE) {
+        } else if (dataType == ChartBusiness.NOTE_TYPE) {
             yValues.add(mStatisticsModel.getCordiality1());
             yValues.add(mStatisticsModel.getCordiality2());
             yValues.add(mStatisticsModel.getCordiality3());
@@ -151,7 +152,9 @@ public class GraphicsBusiness<T extends ChartData, C extends Chart> extends Base
     }
 
     public void onData(Date initialDate, Date finalDate) {
-        statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
+        if (initialDate != null && finalDate != null)
+            statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
+        //evaluationDatabase.retrieveAll();
     }
 
     public interface OnDataChangeListener<T extends ChartData> {

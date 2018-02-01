@@ -17,7 +17,7 @@ import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 public class GraphicsBusiness_old extends BaseBusiness {
 
 //    StatisticsBusiness statisticsBusiness;
-    GraphicsBusiness.OnDataChangeListener onDataChangeListener;
+    ChartBusiness.OnDataChangeListener onDataChangeListener;
     StatisticsModel statisticsModel = StatisticsSingleton.getInstance();
 
     public GraphicsBusiness_old(IMessageServices messageServices, INavigationServices navigationServices) {
@@ -25,7 +25,7 @@ public class GraphicsBusiness_old extends BaseBusiness {
 //        statisticsBusiness = new StatisticsBusiness(messageServices, navigationServices);
     }
 
-    public void getPieDataSatisfaction(GraphicsBusiness.OnDataChangeListener<PieData> onDataChangeListener) {
+    public void getPieDataSatisfaction(ChartBusiness.OnDataChangeListener<PieData> onDataChangeListener) {
         this.onDataChangeListener = onDataChangeListener;
         if(statisticsReady()){
             createGraphicsPieDataSatisfaction(statisticsModel);

@@ -72,7 +72,7 @@ public class Home_oldActivity extends BaseActivity {
                     baseFragment = new HistoricFragment();
                     break;
                 case 2:
-                    baseFragment = new GraphicsFragment();
+                    baseFragment = new ChartFragment();
                     break;
             }
             return baseFragment;
