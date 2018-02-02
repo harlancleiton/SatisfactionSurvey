@@ -16,7 +16,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.ChartBusiness;
@@ -73,8 +76,9 @@ public class ChartFragment extends BaseFragment {
                 final DatePickerDialog datePickerDialogInitial = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        tvInitialDate.setText(i2 + "/" + 1 + i1 + "/" + i);
-                        initialDate = getDate(i2, 1 + i1, i);
+                        int aux = 1+i1;
+                        tvInitialDate.setText(i2 + "/" + aux + "/" + i);
+                        initialDate = getDate(i, i1, i2);
                         updateCharts();
                     }
                 }, year, month, day);
@@ -90,11 +94,9 @@ public class ChartFragment extends BaseFragment {
                 DatePickerDialog datePickerDialogFinal = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        Log.i("i", String.valueOf(i));
-                        Log.i("i1", String.valueOf(i1));
-                        Log.i("i2", String.valueOf(i2));
-                        tvFinalDate.setText(i2 + "/" + 1 + i1 + "/" + i);
-                        finalDate = getDate(i2, 1 + i1, i);
+                        int aux = 1+i1;
+                        tvFinalDate.setText(i2 + "/" + aux + "/" + i);
+                        finalDate = getDate(i, i1, i2);
                         updateCharts();
                     }
                 }, year, month, day);
@@ -155,13 +157,14 @@ public class ChartFragment extends BaseFragment {
     }
 
     private void updateCharts() {
-        //pieChartType.notifyDataSetChanged();
         graphicsSatisfaction.onData(initialDate, finalDate);
     }
 
     private Date getDate(int year, int month, int date) {
-        Date _date = new Date(year, month, date);
-        Log.i("Get Year", Integer.toString(_date.getYear()));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date, 00, 00, 00);
+        //calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date _date = calendar.getTime();
         Log.i("Get Date", _date.toString());
         return _date;
     }

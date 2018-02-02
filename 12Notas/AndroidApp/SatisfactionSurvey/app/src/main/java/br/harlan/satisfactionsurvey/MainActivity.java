@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Parse.initialize(this);
         ParseInstallation.getCurrentInstallation().saveInBackground();
         startActivity(new Intent(this, HomeActivity.class));
+        finish();
         //startActivity(new Intent(this, Home_oldActivity.class ));
     }
 }

@@ -1,5 +1,7 @@
 package br.harlan.satisfactionsurvey.database;
 
+import android.util.Log;
+
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -65,12 +67,13 @@ public class EvaluationDatabase extends BaseDatabase implements ICRUD<Evaluation
 
     @Override
     public void retrieveAll(String className) {
-        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(className);
+        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(EvaluationModel.CLASS_NAME_EVALUATION);
         parseQuery.orderByDescending("createdAt");
         parseQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 databaseServices.retrieveComplete(objects, e);
+                Log.i("Object createAt", objects.get(0).getCreatedAt().toString());
             }
         });
     }
