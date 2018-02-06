@@ -46,6 +46,12 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
         this.dataType = dataType;
     }
 
+    public void onData(Date initialDate, Date finalDate) {
+        if (initialDate != null && finalDate != null)
+            statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
+        //evaluationDatabase.retrieveAll();
+    }
+
     public void loadChartData(OnDataChangeListener onDataChangeListener) {
         this.onDataChangeListener = onDataChangeListener;
         if (checkStatistics())
@@ -92,12 +98,15 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
                 entries.add(new PieEntry(yValues.get(i), xValues.get(i)));
             dataSet = new PieDataSet(entries, chartLabel);
             dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+            dataSet.notifyDataSetChanged();
             data = (T) new PieData((IPieDataSet) dataSet);
+            ((PieData)data).notifyDataChanged();
         }
         onDataChangeListener.onDataChange(data);
     }
 
     private void loadXValues() {
+        xValues.clear();
         if (dataType == ChartBusiness.SATISFACTION_TYPE) {
             chartLabel = "Satisfação";
             xValues.add("Satisfeitos");
@@ -118,6 +127,7 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
     }
 
     private void loadYValues() {
+        yValues.clear();
         if (dataType == ChartBusiness.SATISFACTION_TYPE) {
             yValues.add(mStatisticsModel.getSatisfied());
             yValues.add(mStatisticsModel.getIndifferent());
@@ -149,12 +159,6 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
 
     private boolean isPieDataChart(T data) {
         return chartDataType == PIE_DATA;
-    }
-
-    public void onData(Date initialDate, Date finalDate) {
-        if (initialDate != null && finalDate != null)
-            statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
-        //evaluationDatabase.retrieveAll();
     }
 
     public interface OnDataChangeListener<T extends ChartData> {

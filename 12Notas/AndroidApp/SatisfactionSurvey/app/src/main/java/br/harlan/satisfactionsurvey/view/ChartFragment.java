@@ -123,7 +123,6 @@ public class ChartFragment extends BaseFragment {
         graphicsType.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
-                pieChartType.setData(chartData);
                 pieChartType.setDrawCenterText(true);
                 pieChartType.getDescription().setEnabled(false);
                 pieChartType.setExtraOffsets(5, 10, 5, 5);
@@ -133,6 +132,9 @@ public class ChartFragment extends BaseFragment {
                 pieChartType.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
                 pieChartType.setTransparentCircleRadius(60f);
                 pieChartType.animateX(1000, Easing.EasingOption.EaseInCirc);
+                pieChartType.notifyDataSetChanged();
+                pieChartType.invalidate();
+                pieChartType.setData(chartData);
             }
         });
         graphics4Cs = new ChartBusiness(messageServices, navigationServices, ChartBusiness.BAR_DATA, ChartBusiness.NOTE_TYPE);
@@ -158,6 +160,8 @@ public class ChartFragment extends BaseFragment {
 
     private void updateCharts() {
         graphicsSatisfaction.onData(initialDate, finalDate);
+        graphicsType.onData(initialDate, finalDate);
+        graphics4Cs.onData(initialDate, finalDate);
     }
 
     private Date getDate(int year, int month, int date) {
