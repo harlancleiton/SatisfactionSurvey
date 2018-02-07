@@ -98,9 +98,9 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
                 entries.add(new PieEntry(yValues.get(i), xValues.get(i)));
             dataSet = new PieDataSet(entries, chartLabel);
             dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-            dataSet.notifyDataSetChanged();
+            //dataSet.notifyDataSetChanged();
             data = (T) new PieData((IPieDataSet) dataSet);
-            ((PieData)data).notifyDataChanged();
+            //((PieData)data).notifyDataChanged();
         }
         onDataChangeListener.onDataChange(data);
     }

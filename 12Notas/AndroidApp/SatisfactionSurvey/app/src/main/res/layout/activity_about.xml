@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.harlan.satisfactionsurvey.view.AboutActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo12" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Itech Tecnologia"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="fill"
+        android:layout_margin="8dp"
+        android:text="Empresa especializada em consultoria e soluções na área de Infra Estrutura e Segurança da Informação, seus profissionais possuem mais de 10 anos de experiência no mercado." />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="fill"
+        android:layout_margin="8dp"
+        android:text="Nossos serviços seguem recomendações, melhores praticas e padrões de gestão de segurança da informação. Nossos profissionais são certificados pelas maiores empresas de Infra Estrutura e Segurança da Informação do mundo." />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Em caso de dúvida, suporte ou interesse comercial nossos contatos são:" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="atendimento@itech.net.br" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="(71) 3052-4104|4105" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Visite nosso site: itech.net.br" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Aguardamos seu contato!" />
+
+</android.support.v7.widget.LinearLayoutCompat>

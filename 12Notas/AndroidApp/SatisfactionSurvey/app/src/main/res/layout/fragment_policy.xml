@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.harlan.satisfactionsurvey.view.PolicyFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="@string/politica_qualidade"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Missão"
+            android:textAlignment="inherit"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Atingir a excelência na prestação de serviços notariais atendendo as partes com eficiência, presteza e urbanidade garantindo sua satisfação a partir da alta produtividade, do aprimoramento e da qualidade contínua."
+            android:textAlignment="inherit"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Visão"
+            android:textAlignment="inherit"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Ser referência nacional na prestação de serviços notariais baseando-se nos valores deste Cartório."
+            android:textAlignment="inherit"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Valores"
+            android:textAlignment="inherit"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="- Atendimento ético e cordial para com os clientes;\n
+- Respeito pela diversidade e pelo indivíduo;\n
+- Alta produtividade através do trabalho;\n
+- Constante busca da excelência;\n
+- Ética, integridade e transparência;\n
+- Competência e efetividade;\n
+- Responsabilidade social;\n
+- Publicidade, autenticidade, segurança jurídica e eficácia dos atos jurídicos."
+            android:textAlignment="inherit"
+            android:textSize="16sp" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>

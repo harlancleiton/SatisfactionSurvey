@@ -27,17 +27,37 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5">
 
-            <ImageView
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_is_satisfied"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="start|center_vertical" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_name_cv"
+            <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_name_cv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_email_cv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_telephone_cv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
 
         </android.support.design.widget.CoordinatorLayout>
 

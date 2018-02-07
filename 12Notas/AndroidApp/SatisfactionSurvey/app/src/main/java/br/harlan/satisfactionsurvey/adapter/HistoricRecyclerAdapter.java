@@ -3,6 +3,9 @@ package br.harlan.satisfactionsurvey.adapter;
 import android.support.v4.media.RatingCompat;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v4.widget.TextViewCompat;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,8 @@ public class HistoricRecyclerAdapter extends  RecyclerView.Adapter<HistoricRecyc
                 holder.ivSatisfied.setImageResource(R.drawable.ic_action_sentiment_neutral_light);
             else holder.ivSatisfied.setImageResource(R.drawable.ic_action_sentiment_very_dissatisfied_light);
             holder.tvName.setText(evaluationModel.getName());
+            holder.tvEmail.setText(evaluationModel.getEmail());
+            holder.tvTelephone.setText(evaluationModel.getTelephone());
             holder.rbCommitment.setRating(evaluationModel.getNoteCommitment());
             holder.rbKnowledge.setRating(evaluationModel.getNoteKnowledge());
             holder.rbCommunication.setRating(evaluationModel.getNoteCommunication());
@@ -61,18 +66,22 @@ public class HistoricRecyclerAdapter extends  RecyclerView.Adapter<HistoricRecyc
 
     public class HistoricViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView ivSatisfied;
-        TextView tvName;
-        RatingBar rbCommitment;
-        RatingBar rbCommunication;
-        RatingBar rbCordiality;
-        RatingBar rbKnowledge;
+        AppCompatImageView ivSatisfied;
+        AppCompatTextView tvName;
+        AppCompatTextView tvEmail;
+        AppCompatTextView tvTelephone;
+        AppCompatRatingBar rbCommitment;
+        AppCompatRatingBar rbCommunication;
+        AppCompatRatingBar rbCordiality;
+        AppCompatRatingBar rbKnowledge;
         TextView tvComments;
 
         public HistoricViewHolder(View itemView) {
             super(itemView);
             ivSatisfied = itemView.findViewById(R.id.iv_is_satisfied);
             tvName = itemView.findViewById(R.id.tv_name_cv);
+            tvEmail = itemView.findViewById(R.id.tv_email_cv);
+            tvTelephone = itemView.findViewById(R.id.tv_telephone_cv);
             rbCommitment = itemView.findViewById(R.id.rb_commitment_cv);
             rbCommunication = itemView.findViewById(R.id.rb_communication_cv);
             rbCordiality = itemView.findViewById(R.id.rb_cordiality_cv);

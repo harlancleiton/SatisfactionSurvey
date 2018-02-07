@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.harlan.satisfactionsurvey.view.RegistryFragment">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:text="@string/cartorio"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="O 12º Ofício de Notas de Salvador é um cartório que tem como filosofia de trabalho, garantir a satisfação do cliente, de modo a atender o público de forma segura e eficiente."
+            android:textAlignment="inherit"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Para tornar possível o alcance desses resultados, o 12º Ofício conta hoje com uma equipe de profissionais qualificados, além de um ambiente moderno e estruturado que visa superar as burocracias gerando assim um resultado juridicamente seguro aos seus negócios."
+            android:textAlignment="inherit"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Obrigado pela visita!"
+            android:textSize="16sp" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</FrameLayout>

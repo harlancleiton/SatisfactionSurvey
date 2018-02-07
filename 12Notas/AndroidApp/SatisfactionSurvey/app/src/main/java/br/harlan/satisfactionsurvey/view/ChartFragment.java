@@ -2,8 +2,9 @@ package br.harlan.satisfactionsurvey.view;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.support.v4.widget.ImageViewCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -12,19 +13,16 @@ import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.ChartBusiness;
-import br.harlan.satisfactionsurvey.model.StatisticsModel;
-import br.harlan.satisfactionsurvey.singleton.StatisticsSingleton;
 
 public class ChartFragment extends BaseFragment {
 
@@ -32,8 +30,8 @@ public class ChartFragment extends BaseFragment {
     private PieChart pieChartSatisfaction;
     private PieChart pieChartType;
     private BarChart barChart4Cs;
-    private CardView cvInitialDate;
-    private CardView cvFinalDate;
+    private AppCompatImageView ivInitialDate;
+    private AppCompatImageView ivFinalDate;
     private AppCompatTextView tvInitialDate;
     private AppCompatTextView tvFinalDate;
     ChartBusiness<PieData, PieChart> graphicsSatisfaction;
@@ -58,8 +56,8 @@ public class ChartFragment extends BaseFragment {
         pieChartSatisfaction = rootView.findViewById(R.id.pie_chart_satisfaction);
         pieChartType = rootView.findViewById(R.id.pie_chart_type);
         barChart4Cs = rootView.findViewById(R.id.barchart_4c);
-        cvInitialDate = rootView.findViewById(R.id.cv_initial_date);
-        cvFinalDate = rootView.findViewById(R.id.cv_final_date);
+        ivInitialDate = rootView.findViewById(R.id.iv_initial_date);
+        ivFinalDate = rootView.findViewById(R.id.iv_final_date);
         tvInitialDate = rootView.findViewById(R.id.tv_initial_date);
         tvFinalDate = rootView.findViewById(R.id.tv_final_date);
         //createGraphic();
@@ -67,7 +65,7 @@ public class ChartFragment extends BaseFragment {
 
     @Override
     protected void addEvents() {
-        cvInitialDate.setOnClickListener(new View.OnClickListener() {
+        ivInitialDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 year = 2018;
@@ -85,7 +83,7 @@ public class ChartFragment extends BaseFragment {
                 datePickerDialogInitial.show();
             }
         });
-        cvFinalDate.setOnClickListener(new View.OnClickListener() {
+        ivFinalDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 year = 2018;
@@ -108,6 +106,7 @@ public class ChartFragment extends BaseFragment {
             @Override
             public void onDataChange(PieData chartData) {
                 pieChartSatisfaction.setData(chartData);
+                pieChartSatisfaction.getData().setValueTextSize(16f);
                 pieChartSatisfaction.setDrawCenterText(true);
                 pieChartSatisfaction.getDescription().setEnabled(false);
                 pieChartSatisfaction.setExtraOffsets(5, 10, 5, 5);
@@ -123,6 +122,7 @@ public class ChartFragment extends BaseFragment {
         graphicsType.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
+                pieChartType.setData(chartData);
                 pieChartType.setDrawCenterText(true);
                 pieChartType.getDescription().setEnabled(false);
                 pieChartType.setExtraOffsets(5, 10, 5, 5);
@@ -132,9 +132,7 @@ public class ChartFragment extends BaseFragment {
                 pieChartType.setEntryLabelColor(getResources().getColor(R.color.colorPrimaryDark));
                 pieChartType.setTransparentCircleRadius(60f);
                 pieChartType.animateX(1000, Easing.EasingOption.EaseInCirc);
-                pieChartType.notifyDataSetChanged();
-                pieChartType.invalidate();
-                pieChartType.setData(chartData);
+                pieChartType.getData().setValueTextSize(16f);
             }
         });
         graphics4Cs = new ChartBusiness(messageServices, navigationServices, ChartBusiness.BAR_DATA, ChartBusiness.NOTE_TYPE);
@@ -142,6 +140,7 @@ public class ChartFragment extends BaseFragment {
             @Override
             public void onDataChange(BarData chartData) {
                 barChart4Cs.setData(chartData);
+                barChart4Cs.getData().setValueTextSize(16f);
 //                float groupSpace = 0.1f;
 //                float barSpace = 0.02f;
 //                float barWidth = 0.43f;

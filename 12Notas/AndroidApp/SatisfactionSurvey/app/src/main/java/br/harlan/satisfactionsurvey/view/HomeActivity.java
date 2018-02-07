@@ -11,13 +11,15 @@ import android.view.MenuItem;
 
 import br.harlan.satisfactionsurvey.R;
 
-public class HomeActivity extends AppCompatActivity
+public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public HomeActivity() {
+        super(R.layout.activity_home);
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    protected void initializeComponents() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportFragmentManager().beginTransaction().replace(R.id.coordinator_layout, new SearchFragment()).commit();
@@ -29,6 +31,11 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void addEvents() {
+
     }
 
     @Override
@@ -54,9 +61,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_graphics) {
             getSupportFragmentManager().beginTransaction().replace(R.id.coordinator_layout, new ChartFragment()).commit();
         } else if (id == R.id.nav_12notas) {
-
+            navigationServices.navigateTo(About12NotasActivity.class);
         } else if (id == R.id.nav_help) {
-
+            navigationServices.navigateTo(AboutActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
