@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/edt_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textCapWords|textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/edt_company"
-                    android:inputType="textPersonName" />
+                    android:inputType="textCapWords|textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -107,6 +107,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                app:counterMaxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/edt_telephone"
+                    android:maxLength="15"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
@@ -127,7 +129,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_telephone_search">
+                app:layout_constraintTop_toBottomOf="@+id/til_telephone_search"
+                android:layout_marginLeft="8dp">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"

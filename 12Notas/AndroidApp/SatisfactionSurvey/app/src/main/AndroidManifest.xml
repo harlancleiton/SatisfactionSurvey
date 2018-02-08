@@ -43,7 +43,7 @@
             android:name=".view.About12NotasActivity"
             android:label="@string/title_activity_about12_notas"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.AboutActivity"></activity>
+        <activity android:name=".view.AboutActivity" />
     </application>
 
 </manifest>

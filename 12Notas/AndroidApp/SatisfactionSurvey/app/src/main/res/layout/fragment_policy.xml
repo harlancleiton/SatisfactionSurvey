@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:text="@string/politica_qualidade"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -28,15 +28,14 @@
             android:layout_margin="8dp"
             android:text="Missão"
             android:textAlignment="inherit"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <me.biubiubiu.justifytext.library.JustifyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Atingir a excelência na prestação de serviços notariais atendendo as partes com eficiência, presteza e urbanidade garantindo sua satisfação a partir da alta produtividade, do aprimoramento e da qualidade contínua."
-            android:textAlignment="inherit"
             android:textSize="16sp" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -45,7 +44,7 @@
             android:layout_margin="8dp"
             android:text="Visão"
             android:textAlignment="inherit"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -62,7 +61,7 @@
             android:layout_margin="8dp"
             android:text="Valores"
             android:textAlignment="inherit"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatTextView

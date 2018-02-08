@@ -18,17 +18,25 @@ public class EvaluationBusiness extends BaseBusiness {
         if (validateEvaluation(evaluationModel)) {
             //evaluationModel.setCurrentTime(CurrentDateTime.getCurrentTime());
             //evaluationModel.setCurrentDate(CurrentDateTime.getCurrentDate());
-            new EvaluationDatabase(databaseServices).create(evaluationModel);
+            if (validadeEmail(evaluationModel.getEmail()))
+                new EvaluationDatabase(databaseServices).create(evaluationModel);
+            else messageServices.newToast(R.string.invalid_email);
             //new SearchDatabase(databaseServices).registerEvaluation(evaluationModel);
         } else {
             messageServices.newToast(R.string.toast_fill_in_required_fields);
         }
     }
 
-    public void retrieveReviews(BaseModel.OnDataChangeListener onDataChangeListener){
-        if(onDataChangeListener != null)
+    public void retrieveReviews(BaseModel.OnDataChangeListener onDataChangeListener) {
+        if (onDataChangeListener != null)
             databaseServices.setOnDataChange(onDataChangeListener);
         new EvaluationDatabase(databaseServices).retrieveAll(BaseModel.CLASS_NAME_EVALUATION);
+    }
+
+    private boolean validadeEmail(String email) {
+        if (email.contains("@") && email.contains(".") && email.length() > 4)
+            return true;
+        else return false;
     }
 
     private boolean validateEvaluation(EvaluationModel evaluationModel) {

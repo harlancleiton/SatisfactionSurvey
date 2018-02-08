@@ -6,7 +6,8 @@ import android.widget.Toast;
 
 import br.harlan.satisfactionsurvey.business.services.IMessageServices;
 
-public class MessageServices extends BaseServices implements IMessageServices {
+public class MessageServices extends BaseViewServices implements IMessageServices {
+
     public MessageServices(Activity activity) {
         super(activity);
     }

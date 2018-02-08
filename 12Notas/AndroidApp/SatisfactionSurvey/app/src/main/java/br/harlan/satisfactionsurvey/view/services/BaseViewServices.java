@@ -2,10 +2,11 @@ package br.harlan.satisfactionsurvey.view.services;
 
 import android.app.Activity;
 
-public class BaseServices {
+public class BaseViewServices {
+
     protected Activity activity;
 
-    public BaseServices(Activity activity){
+    public BaseViewServices(Activity activity){
         this.activity = activity;
     }
 

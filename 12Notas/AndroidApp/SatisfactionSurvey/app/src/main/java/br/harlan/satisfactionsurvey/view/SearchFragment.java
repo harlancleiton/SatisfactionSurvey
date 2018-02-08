@@ -9,6 +9,9 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import br.harlan.satisfactionsurvey.R;
 import br.harlan.satisfactionsurvey.business.EvaluationBusiness;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
@@ -30,6 +33,8 @@ public class SearchFragment extends BaseFragment {
     private AppCompatRadioButton rbIndifferent;
     private AppCompatRadioButton rbDissatisfied;
     private AppCompatSpinner spnTypeEvaluation;
+    SimpleMaskFormatter simpleMaskFormatter;
+    MaskTextWatcher maskTextWatcher;
     //endregion Variables
 
     public SearchFragment() {
@@ -59,6 +64,8 @@ public class SearchFragment extends BaseFragment {
                 R.array.types_evaluation_array, android.R.layout.simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnTypeEvaluation.setAdapter(arrayAdapter);
+        simpleMaskFormatter = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        maskTextWatcher = new MaskTextWatcher(edtTelephone, simpleMaskFormatter);
     }
 
     @Override
@@ -69,6 +76,7 @@ public class SearchFragment extends BaseFragment {
                 registerEvaluation();
             }
         });
+        edtTelephone.addTextChangedListener(maskTextWatcher);
     }
     //endregion Methods BaseActivity
 

@@ -1,10 +1,5 @@
 package br.harlan.satisfactionsurvey.model;
 
-
-import android.database.Observable;
-
-import java.util.Observer;
-
 public class EvaluationModel extends BaseModel {
 
     //region Variables

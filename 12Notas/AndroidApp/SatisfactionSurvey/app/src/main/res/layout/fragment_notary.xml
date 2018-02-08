@@ -4,43 +4,48 @@
     android:layout_height="match_parent"
     tools:context="br.harlan.satisfactionsurvey.view.NotaryFragment">
 
-    <android.support.v7.widget.LinearLayoutCompat
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.AppCompatTextView
+        <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:text="@string/tabelia"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Tabeliã do 12º Ofício de Notas de Salvador, Conceição Aparecida Nobre Gaspar exerce sua função como titular do cartório desde 1998, quando aprovada no concurso público realizado em 1987 pelo TJBA, a época ainda em regime estatal."
-            android:textAlignment="inherit"
-            android:textSize="16sp" />
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:text="@string/tabelia"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Além de sua formação no curso de Direito, pela Universidade Católica do Estado da Bahia, Conceição Gaspar possui pós-graduação em Direito Civil, Ciências Criminais e em Direito imobiliário. Cumpriu o seu dever como Presidente da Anoreg-BA no exercício de 2011 a 2014, no auge da transição dos cartórios para o regime privado, tendo um papel fundamental na elevação e recuperação da imagem do serviço notarial no Estado da Bahia."
-            android:textAlignment="inherit"
-            android:textSize="16sp" />
+            <me.biubiubiu.justifytext.library.JustifyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Tabeliã do 12º Ofício de Notas de Salvador, Conceição Aparecida Nobre Gaspar exerce sua função como titular do cartório desde 1998, quando aprovada no concurso público realizado em 1987 pelo TJBA, a época ainda em regime estatal."
+                android:textSize="16sp" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Ministrou por diversas vezes palestras e cursos destinados ao setor imobiliário, ao CRESCI/BA, sobre documentos imobiliários, Direito Notarial e outros relacionados ao setor."
-            android:textSize="16sp" />
+            <me.biubiubiu.justifytext.library.JustifyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Além de sua formação no curso de Direito, pela Universidade Católica do Estado da Bahia, Conceição Gaspar possui pós-graduação em Direito Civil, Ciências Criminais e em Direito imobiliário. Cumpriu o seu dever como Presidente da Anoreg-BA no exercício de 2011 a 2014, no auge da transição dos cartórios para o regime privado, tendo um papel fundamental na elevação e recuperação da imagem do serviço notarial no Estado da Bahia."
+                android:textSize="16sp" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
+            <me.biubiubiu.justifytext.library.JustifyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Ministrou por diversas vezes palestras e cursos destinados ao setor imobiliário, ao CRESCI/BA, sobre documentos imobiliários, Direito Notarial e outros relacionados ao setor."
+                android:textSize="16sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </FrameLayout>

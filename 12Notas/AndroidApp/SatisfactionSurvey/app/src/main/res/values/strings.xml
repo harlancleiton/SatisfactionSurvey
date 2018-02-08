@@ -21,6 +21,7 @@
     <string name="tv_cordiality">Cordialidade</string>
     <string name="tv_knowledge">Conhecimento</string>
     <string name="toast_fill_in_required_fields">Por favor, preencha todos os campos obrigatórios.</string>
+    <string name="invalid_email">Por favor, digite um endereço de email válido.</string>
     <string name="tranks">A sua opinião e fundamental para o nosso desenvolvimento. Obrigado!</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="tab_text_1">Tab 1</string>
@@ -55,4 +56,5 @@
     <string name="cartorio">O Cartório</string>
     <string name="tabelia">A Tabeliã</string>
     <string name="politica_qualidade">Política Qualidade</string>
+    <string name="about">Sobre</string>
 </resources>

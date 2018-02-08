@@ -13,6 +13,7 @@ import br.harlan.satisfactionsurvey.database.services.IDatabaseServices;
 import br.harlan.satisfactionsurvey.model.BaseModel;
 import br.harlan.satisfactionsurvey.model.EvaluationModel;
 import br.harlan.satisfactionsurvey.model.services.ParseObjectToObjectModel;
+import br.harlan.satisfactionsurvey.view.SearchFragment;
 
 public class DatabaseServices implements IDatabaseServices {
 
@@ -31,6 +32,7 @@ public class DatabaseServices implements IDatabaseServices {
     public void saveComplete(ParseException e) {
         if (e == null) {
             messageServices.newToast(R.string.evaluation_sent_sucessfully);
+            navigationServices.loadFragment(new SearchFragment());
         } else {
             e.printStackTrace();
             Log.i("Erro enviar avaliação", e.getCode() + " - " + e.getMessage());
