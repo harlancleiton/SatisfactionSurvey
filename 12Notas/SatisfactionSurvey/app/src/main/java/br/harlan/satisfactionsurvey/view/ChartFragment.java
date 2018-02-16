@@ -2,6 +2,7 @@ package br.harlan.satisfactionsurvey.view;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -78,6 +79,7 @@ public class ChartFragment extends BaseFragment {
 
     @Override
     protected void addEvents() {
+        //region Pick Date
         ivInitialDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +116,8 @@ public class ChartFragment extends BaseFragment {
                 datePickerDialogFinal.show();
             }
         });
+        //endregion Pick Date
+        //region Chart Satisfaction
         graphicsSatisfaction = new ChartBusiness(messageServices, navigationServices, ChartBusiness.PIE_DATA, ChartBusiness.SATISFACTION_TYPE);
         graphicsSatisfaction.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
@@ -121,7 +125,7 @@ public class ChartFragment extends BaseFragment {
                 Legend legend = pieChartSatisfaction.getLegend();
                 legend.setFormSize(10f);
                 legend.setForm(Legend.LegendForm.CIRCLE);
-                legend.setPosition(Legend.LegendPosition.PIECHART_CENTER);
+                //legend.setPosition(Legend.LegendPosition.PIECHART_CENTER);
                 legend.setTextSize(12f);
                 legend.setTextColor(Color.BLACK);
                 legend.setYEntrySpace(5f);
@@ -140,14 +144,19 @@ public class ChartFragment extends BaseFragment {
                 pieChartSatisfaction.animateX(1000, Easing.EasingOption.EaseInCirc);
             }
         });
+        //endregion Chart Satisfaction
+        //region Chart Type
         graphicsType = new ChartBusiness(messageServices, navigationServices, ChartBusiness.PIE_DATA, ChartBusiness.COMMENT_TYPE);
         graphicsType.loadChartData(new ChartBusiness.OnDataChangeListener<PieData>() {
             @Override
             public void onDataChange(PieData chartData) {
+                int total = graphicsType.getTotal();
+                AppCompatTextView tvTotal = viewRoot.findViewById(R.id.tv_total_chart);
+                tvTotal.setText(String.valueOf(total));
                 Legend legendType = pieChartType.getLegend();
                 legendType.setFormSize(10f);
                 legendType.setForm(Legend.LegendForm.CIRCLE);
-                legendType.setPosition(Legend.LegendPosition.PIECHART_CENTER);
+                //legendType.setPosition(Legend.LegendPosition.PIECHART_CENTER);
                 legendType.setTextSize(12f);
                 legendType.setTextColor(Color.BLACK);
                 legendType.setYEntrySpace(5f);
@@ -166,12 +175,22 @@ public class ChartFragment extends BaseFragment {
                 pieChartType.getData().setValueTextSize(16f);
             }
         });
+        //endregion Chart Type
+        //region Chart 4Cs
         graphics4Cs = new ChartBusiness(messageServices, navigationServices, ChartBusiness.BAR_DATA, ChartBusiness.NOTE_TYPE);
         graphics4Cs.loadChartData(new ChartBusiness.OnDataChangeListener<BarData>() {
             @Override
             public void onDataChange(BarData chartData) {
+                //chartData.setValueFormatter(new ValueFormatter());
                 barChart4Cs.setData(chartData);
                 barChart4Cs.getData().setValueTextSize(16f);
+                barChart4Cs.getAxisRight().setEnabled(false);
+                barChart4Cs.getXAxis().setEnabled(false);
+                barChart4Cs.getAxisLeft().setAxisMinimum(0);
+                barChart4Cs.getAxisLeft().setAxisMaximum(5);
+                //yAxis.setEnabled(false);
+                barChart4Cs.notifyDataSetChanged();
+                barChart4Cs.invalidate();
 //                float groupSpace = 0.1f;
 //                float barSpace = 0.02f;
 //                float barWidth = 0.43f;
@@ -186,6 +205,7 @@ public class ChartFragment extends BaseFragment {
 //                xAxis.setCenterAxisLabels(true);
             }
         });
+        //endregion Chart 4Cs
     }
 
     private void updateCharts() {

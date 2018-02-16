@@ -49,13 +49,11 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
     public void onData(Date initialDate, Date finalDate) {
         if (initialDate != null && finalDate != null)
             statisticsDatabase.retrieveAll(StatisticsModel.CLASS_NAME_STATISTICS, initialDate, finalDate);
-        //evaluationDatabase.retrieveAll();
     }
 
     public void loadChartData(OnDataChangeListener onDataChangeListener) {
         this.onDataChangeListener = onDataChangeListener;
         if (checkStatistics())
-            //loadData();
             createChartDataType();
         else {
             statisticsDatabase = new StatisticsDatabase(databaseServices);
@@ -70,28 +68,59 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
         }
     }
 
+    private void calculateAverageNotes(StatisticsModel mStatisticsModel) {
+        mStatisticsModel.setCommitment(
+                (mStatisticsModel.getCommitment1() * 1
+                        + mStatisticsModel.getCommitment2() * 2
+                        + mStatisticsModel.getCommitment3() * 3
+                        + mStatisticsModel.getCommitment4() * 4
+                        + mStatisticsModel.getCommitment5() * 5)
+                        /
+                        mStatisticsModel.getTotal()
+        );
+        mStatisticsModel.setKnowledge(
+                (mStatisticsModel.getKnowledge1() * 1
+                        + mStatisticsModel.getKnowledge2() * 2
+                        + mStatisticsModel.getKnowledge3() * 3
+                        + mStatisticsModel.getKnowledge4() * 4
+                        + mStatisticsModel.getKnowledge5() * 5)
+                        /
+                        mStatisticsModel.getTotal()
+        );
+        mStatisticsModel.setCordiality(
+                (mStatisticsModel.getCordiality1() * 1
+                        + mStatisticsModel.getCordiality2() * 2
+                        + mStatisticsModel.getCordiality3() * 3
+                        + mStatisticsModel.getCordiality4() * 4
+                        + mStatisticsModel.getCordiality5() * 5)
+                        /
+                        mStatisticsModel.getTotal()
+        );
+        mStatisticsModel.setCommunication(
+                (mStatisticsModel.getCommunication1() * 1
+                        + mStatisticsModel.getCommunication2() * 2
+                        + mStatisticsModel.getCommunication3() * 3
+                        + mStatisticsModel.getCommunication4() * 4
+                        + mStatisticsModel.getCommunication5() * 5)
+                        /
+                        mStatisticsModel.getTotal()
+        );
+    }
+
     private void createChartDataType() {
+        calculateAverageNotes(mStatisticsModel);
         loadYValues();
         loadXValues();
         List entries;
         if (isBarDataChart(data)) {
             ArrayList<BarEntry> barEntries = new ArrayList<>();
-            barEntries.add(new BarEntry(1, mStatisticsModel.getCordiality1()));
-            barEntries.add(new BarEntry(2, mStatisticsModel.getCordiality2()));
-            barEntries.add(new BarEntry(3, mStatisticsModel.getCordiality3()));
-            barEntries.add(new BarEntry(4, mStatisticsModel.getCordiality4()));
-            barEntries.add(new BarEntry(5, mStatisticsModel.getCordiality5()));
-            ArrayList<BarEntry> barEntries1 = new ArrayList<>();
-            barEntries.add(new BarEntry(6, mStatisticsModel.getKnowledge1()));
-            barEntries.add(new BarEntry(7, mStatisticsModel.getKnowledge2()));
-            barEntries.add(new BarEntry(8, mStatisticsModel.getKnowledge3()));
-            barEntries.add(new BarEntry(9, mStatisticsModel.getKnowledge4()));
-            barEntries.add(new BarEntry(10, mStatisticsModel.getKnowledge5()));
-            BarDataSet barDataSet = new BarDataSet(barEntries, "Cordialidade");
-            BarDataSet barDataSet1 = new BarDataSet(barEntries1, "Conhecimento");
+            barEntries.add(new BarEntry(1, mStatisticsModel.getKnowledge()));
+            barEntries.add(new BarEntry(2, mStatisticsModel.getCommunication()));
+            barEntries.add(new BarEntry(3, mStatisticsModel.getCordiality()));
+            barEntries.add(new BarEntry(4, mStatisticsModel.getCommitment()));
+            BarDataSet barDataSet = new BarDataSet(barEntries, "4Cs");
             barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
-            barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
-            data = (T) new BarData(barDataSet, barDataSet1);
+            data = (T) new BarData(barDataSet);
         } else {
             entries = new ArrayList<PieEntry>();
             for (int i = 0; i < xValues.size(); i++)
@@ -158,6 +187,10 @@ public class ChartBusiness<T extends ChartData, C extends Chart> extends BaseBus
 
     private boolean isPieDataChart(T data) {
         return chartDataType == PIE_DATA;
+    }
+
+    public int getTotal() {
+        return mStatisticsModel.getTotal();
     }
 
     public interface OnDataChangeListener<T extends ChartData> {

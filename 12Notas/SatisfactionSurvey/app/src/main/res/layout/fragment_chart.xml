@@ -66,6 +66,26 @@
 
         </android.support.v7.widget.LinearLayoutCompat>
 
+        <FrameLayout
+            android:layout_marginLeft="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:color/transparent" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_total_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="8dp"
+                android:textColor="@android:color/white"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </FrameLayout>
+
     </android.support.v7.widget.LinearLayoutCompat>
 
     <ScrollView

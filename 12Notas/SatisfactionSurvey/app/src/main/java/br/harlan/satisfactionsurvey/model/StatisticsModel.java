@@ -3,34 +3,38 @@ package br.harlan.satisfactionsurvey.model;
 public class StatisticsModel extends BaseModel {
 
     //region Variables
-    int total;
-    int satisfied;
-    int indifferent;
-    int dissatisfied;
-    int compliment;
-    int doubt;
-    int suggestion;
-    int criticims;
-    int knowledge1;
-    int knowledge2;
-    int knowledge3;
-    int knowledge4;
-    int knowledge5;
-    int communication1;
-    int communication2;
-    int communication3;
-    int communication4;
-    int communication5;
-    int commitment1;
-    int commitment2;
-    int commitment3;
-    int commitment4;
-    int commitment5;
-    int cordiality1;
-    int cordiality2;
-    int cordiality3;
-    int cordiality4;
-    int cordiality5;
+    private int total;
+    private int satisfied;
+    private int indifferent;
+    private int dissatisfied;
+    private int compliment;
+    private int doubt;
+    private int suggestion;
+    private int criticims;
+    private int knowledge1;
+    private int knowledge2;
+    private int knowledge3;
+    private int knowledge4;
+    private int knowledge5;
+    private int knowledge;
+    private int communication1;
+    private int communication2;
+    private int communication3;
+    private int communication4;
+    private int communication5;
+    private int communication;
+    private int commitment1;
+    private int commitment2;
+    private int commitment3;
+    private int commitment4;
+    private int commitment5;
+    private int commitment;
+    private int cordiality1;
+    private int cordiality2;
+    private int cordiality3;
+    private int cordiality4;
+    private int cordiality5;
+    private int cordiality;
     //endregion Variables
 
     public StatisticsModel() {
@@ -262,6 +266,40 @@ public class StatisticsModel extends BaseModel {
     public void setCordiality5(int cordiality5) {
         this.cordiality5 = cordiality5;
     }
+
+    public int getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(int knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public int getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(int communication) {
+        this.communication = communication;
+    }
+
+    public int getCommitment() {
+        return commitment;
+    }
+
+    public void setCommitment(int commitment) {
+        this.commitment = commitment;
+    }
+
+    public int getCordiality() {
+        return cordiality;
+    }
+
+    public void setCordiality(int cordiality) {
+        this.cordiality = cordiality;
+    }
+
+
     //endregion Getters and Setters
 
 //    public interface OnStatisticsChangeListener {

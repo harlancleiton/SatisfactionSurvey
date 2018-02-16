@@ -2,6 +2,7 @@ package br.harlan.satisfactionsurvey.database;
 
 import android.util.Log;
 
+import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -31,14 +32,37 @@ public class EvaluationDatabase extends BaseDatabase implements ICRUD<Evaluation
     public void create(EvaluationModel object) {
         final ParseObject parseObject = ObjectModelToParseObject.getParseObject(object);
         final ParseObject statisticsObject = new StatisticsBusiness(null, null).updateStatistics(object);
-        ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_STATISTICS);
+        final ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery(StatisticsModel.CLASS_NAME_STATISTICS);
+        parseQuery.countInBackground(new CountCallback() {
+            @Override
+            public void done(int count, ParseException e) {
+                if (count > 0) {
+                    createEvaluation(parseObject, parseQuery, statisticsObject);
+                } else createStatistics(parseObject, parseQuery, statisticsObject);
+            }
+        });
+    }
+
+    private void createStatistics(final ParseObject parseObject, final ParseQuery<ParseObject> parseQuery, ParseObject statisticsObject) {
+        statisticsObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null)
+                    createEvaluation(parseObject, parseQuery, null);
+            }
+        });
+    }
+
+    private void createEvaluation(final ParseObject parseObject, final ParseQuery parseQuery, final ParseObject statisticsObject) {
         parseQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                statisticsObject.setObjectId(object.getObjectId());
                 List<ParseObject> parseObjects = new ArrayList<>();
                 parseObjects.add(parseObject);
-                parseObjects.add(statisticsObject);
+                if (statisticsObject != null) {
+                    statisticsObject.setObjectId(object.getObjectId());
+                    parseObjects.add(statisticsObject);
+                }
                 ParseObject.saveAllInBackground(parseObjects, new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -50,7 +74,7 @@ public class EvaluationDatabase extends BaseDatabase implements ICRUD<Evaluation
     }
 
     @Override
-    public void update(EvaluationModel object){
+    public void update(EvaluationModel object) {
         create(object);
     }
 
